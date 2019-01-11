@@ -38,6 +38,8 @@
 }
 ```
 
+[Team Object](#Team%20Object)
+[Event Object](#Event%20Object)
 [Attendance Object](#Attendance%20Object)
 
 #### Team Object
@@ -46,12 +48,8 @@
 {
   "id": "INTEGER",
   "name": "STRING",
-  "events": [
-    <Event Object>
-  ],
-  "persons": [
-    <Person Object>
-  ]
+  "events": ["<Event Object>"],
+  "persons": ["<Person Object>"]
 }
 ```
 
