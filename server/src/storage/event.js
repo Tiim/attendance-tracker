@@ -15,6 +15,17 @@ module.exports = {
       .where({ id });
   },
 
+  async getForTeam(teamId, options) {
+    const date = options.date || new Date();
+
+    return await knex
+      .from('event')
+      .select()
+      .where({ teamId: id })
+      .where('date', '<', date)
+      .orderBy(date, 'desc');
+  },
+
   async insert(date, teamId) {
     const ret = await knex('event')
       .insert({ date, teamId })

@@ -1,5 +1,6 @@
-const hydrate = require('nesthydrationjs')();
 const { knex } = require('../db');
+
+const event = require('./event');
 
 module.exports = {
   async getAll(options) {
@@ -9,7 +10,7 @@ module.exports = {
       .orderBy('name');
   },
 
-  async get(id) {
+  async get(id, options) {
     const [team] = await knex
       .from('team')
       .select()
@@ -18,10 +19,9 @@ module.exports = {
       .from('person')
       .select()
       .where({ teamId: id });
-    const events = await knex
-      .from('event')
-      .select()
-      .where({ teamId: id });
+    const events = await event.getForTeam(team.id, {
+      date: options.date,
+    });
     return {
       ...team,
       persons,

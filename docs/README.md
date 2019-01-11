@@ -1,5 +1,7 @@
 # Anwesenheitsliste Docs
 
+<!-- markdownlint-disable MD024 -->
+
 ## Rest Api
 
 ### Objects
