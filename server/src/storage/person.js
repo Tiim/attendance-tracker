@@ -28,6 +28,13 @@ module.exports = {
     };
   },
 
+  async getForTeam(teamId) {
+    return await knex
+      .from('person')
+      .select()
+      .where({ teamId });
+  },
+
   async insert(name, teamId) {
     const ret = await knex('person')
       .insert({ name, teamId })

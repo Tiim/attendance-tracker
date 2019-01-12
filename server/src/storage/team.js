@@ -1,27 +1,28 @@
 const { knex } = require('../db');
 
 const event = require('./event');
+const person = require('./person');
 
 module.exports = {
-  async getAll(options) {
+  async getAll() {
     return await knex
       .from('team')
       .select('id', 'name')
       .orderBy('name');
   },
 
-  async get(id, options) {
-    const [team] = await knex
+  async get(id) {
+    const teamPromise = knex
       .from('team')
       .select()
       .where({ id });
-    const persons = await knex
-      .from('person')
-      .select()
-      .where({ teamId: id });
-    const events = await event.getForTeam(team.id, {
-      date: options.date,
-    });
+    const personsPromise = person.getForTeam(id);
+    const eventsPromise = event.getForTeam(id);
+    const [[team], persons, events] = await Promise.all([
+      teamPromise,
+      personsPromise,
+      eventsPromise,
+    ]);
     return {
       ...team,
       persons,
