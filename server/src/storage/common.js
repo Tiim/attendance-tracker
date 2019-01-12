@@ -3,9 +3,6 @@ const { knex } = require('../db');
 const aggregateQuery = (table, as) => {
   return `coalesce(json_agg(${table}) filter(where ${table}.id is not null), '[]') as ${as}`;
 };
-const aggregateQuerySingle = (table, as) => {
-  return `row_to_json(${table}) as ${as}`;
-};
 
 const event = {
   aggreagte: aggregateQuery('attendance', 'attendances'),
@@ -25,14 +22,14 @@ const event = {
         'event.id',
         'event.date',
         'event.teamId',
-        knex.raw(aggregateQuerySingle('attendance', 'attendance'))
+        knex.raw(aggregateQuery('attendance', 'attendances'))
       )
       .where({ teamId })
-
       .leftJoin('attendance', {
         'event.id': 'attendance.eventId',
         'attendance.personId': knex.raw(personId),
-      });
+      })
+      .groupBy('event.id');
   },
 };
 
