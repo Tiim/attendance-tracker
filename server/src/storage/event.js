@@ -1,29 +1,31 @@
 const { knex } = require('../db');
 
+const selectAgg = `coalesce(json_agg(attendance) filter (where attendance.id is not null), '[]' ) as attendances`;
+
 module.exports = {
   async getAll(options) {
     return await knex
       .from('event')
-      .select()
-      .orderBy('date');
+      .select('event.id', 'event.date', 'event.teamId', knex.raw(selectAgg))
+      .orderBy('date')
+      .leftJoin('attendance', { 'event.id': 'attendance.eventId' })
+      .groupBy('event.id');
   },
 
   async get(id) {
     return await knex
       .from('event')
-      .select()
-      .where({ id });
+      .select('event.id', 'event.date', 'event.teamId', knex.raw(selectAgg))
+      .where({ id })
+      .leftJoin('attendance', { 'event.id': 'attendance.eventId' });
   },
 
-  async getForTeam(teamId, options) {
-    const date = options.date || new Date();
-
+  async getForTeam(teamId) {
     return await knex
       .from('event')
       .select()
-      .where({ teamId: id })
-      .where('date', '<', date)
-      .orderBy(date, 'desc');
+      .where({ teamId })
+      .orderBy('date', 'desc');
   },
 
   async insert(date, teamId) {
