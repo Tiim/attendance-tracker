@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import createLogger from 'vuex/dist/logger';
 import { debug } from '../config';
 
+import event from './modules/event';
 import person from './modules/person';
 import team from './modules/team';
 
@@ -12,6 +13,7 @@ const store = new Vuex.Store({
   strict: debug,
 
   modules: {
+    event,
     person,
     team,
   },

@@ -18,8 +18,9 @@ const actions = {
 
   async loadSingle(context, id) {
     const team = await fetch(teamUrl(id)).then((res) => res.json());
-    context.commit('person/setPersons', team.persons, { root: true });
     context.commit('setTeamSingle', team);
+    context.commit('person/setPersons', team.persons, { root: true });
+    context.commit('event/setEvents', team.events, { root: true });
   },
 };
 
