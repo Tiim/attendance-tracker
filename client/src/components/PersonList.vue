@@ -2,7 +2,7 @@
   <div>
     <div class="menu">
       <ul class="menu-list">
-        <li v-for="person in people" v-bind:key="person.id">
+        <li v-for="person in persons" v-bind:key="person.id">
           <router-link :to="{name: 'person', params: {id: person.id}}">{{person.name}}</router-link>
         </li>
       </ul>
@@ -17,6 +17,11 @@ export default {
     teamId: {
       type: Number,
       required: false,
+    },
+  },
+  computed: {
+    persons() {
+      return this.$store.state.person.persons;
     },
   },
 };

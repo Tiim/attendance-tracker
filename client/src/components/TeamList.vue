@@ -15,10 +15,13 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-
 export default {
   name: 'TeamList',
+  computed: {
+    teams() {
+      return this.$store.state.teams.teams;
+    },
+  },
 };
 </script>
 

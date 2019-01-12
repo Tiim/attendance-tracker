@@ -7,13 +7,6 @@
           <input class="input" type="text" v-model="name" placeholder="Team Name">
         </p>
       </div>
-      <div class="field" v-if="errors.length">
-        <div class="notification is-warning">
-          <dl class="content">
-            <dt v-for="e in errors" v-bind:key="e">{{e}}</dt>
-          </dl>
-        </div>
-      </div>
       <div class="field">
         <p class="control">
           <button @click="submit" class="button is-link">Add Team</button>
@@ -27,6 +20,9 @@
 <script>
 export default {
   name: 'TeamAdd',
+  data() {
+    return { name: '' };
+  },
   methods: {
     submit() {
       //TODO: Submit new team

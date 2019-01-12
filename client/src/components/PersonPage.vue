@@ -19,6 +19,9 @@ export default {
     PersonAdd,
     PersonList,
   },
+  created() {
+    this.$store.dispatch('person/load');
+  },
 };
 </script>
 

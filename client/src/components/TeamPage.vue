@@ -21,6 +21,9 @@ export default {
     TeamAdd,
     TeamList,
   },
+  created() {
+    this.$store.dispatch('teams/load');
+  },
 };
 </script>
 
