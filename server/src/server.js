@@ -14,7 +14,7 @@ fastify.use(morgan('dev'));
 
 fastify.register(api, { prefix: '/api' });
 fastify.get('/', (req, reply) => {
-  reply.send({});
+  reply.send({ apis: ['/api'] });
 });
 
 const startServer = async () => {
