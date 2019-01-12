@@ -1,14 +1,10 @@
 import Vue from 'vue';
-import { apiUrl } from '../../config';
 
 const state = {
   events: [],
 };
 
 const getters = {};
-
-const eventsUrl = `${apiUrl}/events`;
-const eventUrl = (id) => `${eventsUrl}/${id}`;
 
 const actions = {};
 

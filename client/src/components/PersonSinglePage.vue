@@ -3,17 +3,18 @@
     <div v-if="person">
       <h1>{{person.name}}</h1>
       <p v-if="person.team">Team: {{person.team.name}}</p>
-    </div>
-    <div v-else>
-      <p>loading..</p>
+      <PersonAttendanceTable v-bind:personId="person.id"/>
     </div>
   </div>
 </template> 
 
 <script>
+import PersonAttendanceTable from './PersonAttendanceTable';
 export default {
   name: 'PersonSinglePage',
-  components: {},
+  components: {
+    PersonAttendanceTable,
+  },
   computed: {
     person() {
       return this.$store.state.person.persons.find(

@@ -13,21 +13,9 @@
 <script>
 export default {
   name: 'PersonList',
-  props: {
-    teamId: {
-      type: Number,
-      required: false,
-    },
-  },
   computed: {
     persons() {
-      if (this.teamId) {
-        return this.$store.state.person.persons.filter((p) => {
-          return p.teamId == this.teamId;
-        });
-      } else {
-        return this.$store.state.person.persons;
-      }
+      return this.$store.state.person.persons;
     },
   },
 };
