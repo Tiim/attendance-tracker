@@ -22,7 +22,7 @@ export default {
     TeamList,
   },
   created() {
-    this.$store.dispatch('teams/load');
+    this.$store.dispatch('team/load');
   },
 };
 </script>

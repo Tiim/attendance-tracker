@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import { apiUrl } from '../../config';
 
 const state = {
@@ -16,21 +17,30 @@ const actions = {
   },
 
   async loadSingle(context, id) {
-    const team = await fetch(teamUrl(id));
+    const team = await fetch(teamUrl(id)).then((res) => res.json());
+    context.commit('person/setPersons', team.persons, { root: true });
     context.commit('setTeamSingle', team);
   },
 };
 
 const mutations = {
   setTeams(state, teams) {
-    state.teams = teams;
+    teams.forEach((team) => {
+      const i = state.teams.findIndex((t) => t.id === team.id);
+      if (i >= 0) {
+        Vue.set(state.teams, i, Object.assign(state.teams[i], team));
+      } else {
+        state.teams.push(team);
+      }
+    });
   },
   setTeamSingle(state, team) {
     const i = state.teams.findIndex((t) => t.id === team.id);
-    state.teams[i] = {
-      ...state.teams[i],
-      ...team,
-    };
+    if (i >= 0) {
+      Vue.set(state.teams, i, Object.assign(state.teams[i], team));
+    } else {
+      state.teams.push(team);
+    }
   },
 };
 

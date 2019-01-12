@@ -21,7 +21,13 @@ export default {
   },
   computed: {
     persons() {
-      return this.$store.state.person.persons;
+      if (this.teamId) {
+        return this.$store.state.person.persons.filter((p) => {
+          return p.teamId == this.teamId;
+        });
+      } else {
+        return this.$store.state.person.persons;
+      }
     },
   },
 };

@@ -3,14 +3,11 @@
     <div v-if="team">
       <div class="content">
         <h1>{{team.name}}</h1>
-        <PersonList :teamId="id"/>
+        <PersonList :teamId="team.id"/>
       </div>
       <div class="content">
-        <PersonAdd :teamId="id"/>
+        <PersonAdd :teamId="team.id"/>
       </div>
-    </div>
-    <div v-else>
-      <p>loading..</p>
     </div>
   </div>
 </template>
@@ -20,13 +17,19 @@ import PersonAdd from './PersonAdd';
 import PersonList from './PersonList';
 export default {
   name: 'TeamSinglePage',
-  data() {
-    return {};
-  },
-  computed: {},
   components: {
     PersonAdd,
     PersonList,
+  },
+  computed: {
+    team() {
+      return this.$store.state.team.teams.find(
+        (t) => t.id == this.$route.params.id
+      );
+    },
+  },
+  created() {
+    this.$store.dispatch('team/loadSingle', this.$route.params.id);
   },
 };
 </script>

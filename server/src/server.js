@@ -3,7 +3,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const fastify = Fastify({
   ignoreTrailingSlash: true,
-  logger: true,
+  logger: false,
 });
 
 const config = require('./config');

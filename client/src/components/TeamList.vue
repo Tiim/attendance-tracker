@@ -19,7 +19,7 @@ export default {
   name: 'TeamList',
   computed: {
     teams() {
-      return this.$store.state.teams.teams;
+      return this.$store.state.team.teams;
     },
   },
 };

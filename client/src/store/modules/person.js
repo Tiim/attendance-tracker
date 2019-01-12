@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import { apiUrl } from '../../config';
 
 const state = {
@@ -17,7 +18,14 @@ const actions = {
 
 const mutations = {
   setPersons(state, persons) {
-    state.persons = persons;
+    persons.forEach((person) => {
+      const i = state.persons.findIndex((t) => t.id === person.id);
+      if (i >= 0) {
+        Vue.set(state.persons, i, Object.assign(state.persons[i], person));
+      } else {
+        state.persons.push(person);
+      }
+    });
   },
 };
 
