@@ -19,10 +19,6 @@ import { mapState } from 'vuex';
 
 export default {
   name: 'TeamList',
-  computed: mapState('teams', ['teams']),
-  beforeMount() {
-    this.$store.dispatch('teams/load');
-  },
 };
 </script>
 

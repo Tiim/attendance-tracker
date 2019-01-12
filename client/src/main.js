@@ -6,7 +6,15 @@ import router from './router';
 import store from './store';
 import './../node_modules/bulma/css/bulma.css';
 
+import * as config from './config';
+
 Vue.config.productionTip = false;
+
+const wakeBackend = async () => {
+  await fetch(config.apiUrl).then((r) => r.json());
+};
+
+wakeBackend();
 
 /* eslint-disable no-new */
 new Vue({

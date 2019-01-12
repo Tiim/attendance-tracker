@@ -13,17 +13,6 @@
 <script>
 export default {
   name: 'PersonList',
-  computed: {
-    people() {
-      if (this.teamId === undefined) {
-        return this.$store.state.person.people;
-      }
-
-      return this.$store.state.person.people.filter(
-        (p) => p.teamId === this.teamId
-      );
-    },
-  },
   props: {
     teamId: {
       type: Number,

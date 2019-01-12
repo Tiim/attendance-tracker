@@ -23,21 +23,10 @@ export default {
   data() {
     return {};
   },
-  computed: {
-    id() {
-      return parseInt(this.$route.params.id);
-    },
-    team() {
-      return this.$store.state.teams.teams.find((t) => t.id === this.id);
-    },
-  },
+  computed: {},
   components: {
     PersonAdd,
     PersonList,
-  },
-  beforeMount() {
-    this.$store.dispatch('teams/load');
-    this.$store.dispatch('person/load');
   },
 };
 </script>

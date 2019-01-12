@@ -44,19 +44,7 @@ export default {
 
   methods: {
     submit() {
-      this.errors = [];
-
-      if (!this.name || this.name.length < 3) {
-        this.errors.push('Name must be set and at least 3 characters long');
-      }
-
-      if (!this.errors.length) {
-        this.$store.dispatch('person/add', {
-          name: this.name,
-          teamId: this.teamId,
-        });
-        this.name = '';
-      }
+      //TODO: submit new person
     },
   },
 };

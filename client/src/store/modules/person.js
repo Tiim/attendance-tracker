@@ -6,7 +6,7 @@ const state = {
 
 const getters = {};
 
-const peopleUrl = `${apiUrl}/person`;
+const peopleUrl = `${apiUrl}/persons`;
 
 const actions = {
   async load(context) {

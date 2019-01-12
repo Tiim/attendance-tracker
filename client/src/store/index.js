@@ -5,7 +5,6 @@ import { debug } from '../config';
 
 import person from './modules/person';
 import teams from './modules/teams';
-import status from './modules/status';
 
 Vue.use(Vuex);
 
@@ -15,7 +14,6 @@ const store = new Vuex.Store({
   modules: {
     person,
     teams,
-    status,
   },
 
   plugins: [createLogger()],

@@ -15,15 +15,9 @@ import PersonAdd from './PersonAdd';
 import PersonList from './PersonList';
 export default {
   name: 'PersonPage',
-  data() {
-    return {};
-  },
   components: {
     PersonAdd,
     PersonList,
-  },
-  beforeMount() {
-    this.$store.dispatch('person/load');
   },
 };
 </script>

@@ -27,27 +27,9 @@
 <script>
 export default {
   name: 'TeamAdd',
-  data() {
-    return {
-      errors: [],
-      name: '',
-    };
-  },
-
   methods: {
     submit() {
-      this.errors = [];
-
-      if (!this.name || this.name.length < 3) {
-        this.errors.push('Name must be set and at least 3 characters long');
-      }
-
-      if (!this.errors.length) {
-        this.$store.dispatch('teams/add', {
-          name: this.name,
-        });
-        this.name = '';
-      }
+      //TODO: Submit new team
     },
   },
 };
