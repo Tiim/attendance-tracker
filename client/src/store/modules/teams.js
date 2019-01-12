@@ -19,21 +19,6 @@ const actions = {
     const team = await fetch(teamUrl(id));
     context.commit('setTeamSingle', team);
   },
-
-  async add(context, team) {
-    const response = await fetch(teamsUrl, {
-      method: 'POST',
-      body: JSON.stringify(team),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    if (response.ok) {
-      context.commit('add', await response.json());
-    } else {
-      console.log(response);
-    }
-  },
 };
 
 const mutations = {
@@ -46,9 +31,6 @@ const mutations = {
       ...state.teams[i],
       ...team,
     };
-  },
-  add(state, newTeam) {
-    state.teams.push(newTeam);
   },
 };
 

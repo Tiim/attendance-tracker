@@ -1,42 +1,23 @@
 import { apiUrl } from '../../config';
 
 const state = {
-  people: [],
+  persons: [],
 };
 
 const getters = {};
 
-const peopleUrl = `${apiUrl}/persons`;
+const personsUrl = `${apiUrl}/persons`;
 
 const actions = {
   async load(context) {
-    const people = await fetch(peopleUrl).then((res) => res.json());
-    context.commit('setPeople', people);
-  },
-
-  async add(context, person) {
-    const response = await fetch(peopleUrl, {
-      method: 'POST',
-      body: JSON.stringify(person),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    if (response.ok) {
-      context.commit('add', await response.json());
-    } else {
-      console.log(response);
-    }
+    const persons = await fetch(personsUrl).then((res) => res.json());
+    context.commit('setPersons', persons);
   },
 };
 
 const mutations = {
-  setPeople(state, people) {
-    state.people = people;
-  },
-
-  add(state, newPerson) {
-    state.people.push(newPerson);
+  setPersons(state, persons) {
+    state.persons = persons;
   },
 };
 
