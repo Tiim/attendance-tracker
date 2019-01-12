@@ -1,31 +1,34 @@
 const { knex } = require('../db');
-
-const selectAgg = `coalesce(json_agg(attendance) filter (where attendance.id is not null), '[]' ) as attendances`;
+const common = require('./common');
 
 module.exports = {
   async getAll(options) {
     return await knex
       .from('event')
-      .select('event.id', 'event.date', 'event.teamId', knex.raw(selectAgg))
+      .select(
+        'event.id',
+        'event.date',
+        'event.teamId',
+        knex.raw(common.event.aggreagte)
+      )
       .orderBy('date')
       .leftJoin('attendance', { 'event.id': 'attendance.eventId' })
       .groupBy('event.id');
   },
 
   async get(id) {
-    return await knex
+    const res = await knex
       .from('event')
-      .select('event.id', 'event.date', 'event.teamId', knex.raw(selectAgg))
-      .where({ id })
-      .leftJoin('attendance', { 'event.id': 'attendance.eventId' });
-  },
-
-  async getForTeam(teamId) {
-    return await knex
-      .from('event')
-      .select()
-      .where({ teamId })
-      .orderBy('date', 'desc');
+      .select(
+        'event.id',
+        'event.date',
+        'event.teamId',
+        knex.raw(common.event.aggreagte)
+      )
+      .where({ 'event.id': id })
+      .leftJoin('attendance', { 'event.id': 'attendance.eventId' })
+      .groupBy('event.id');
+    return res[0];
   },
 
   async insert(date, teamId) {

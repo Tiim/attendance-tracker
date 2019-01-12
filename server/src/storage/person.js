@@ -1,11 +1,13 @@
 const { knex } = require('../db');
 
+const common = require('./common');
+
 module.exports = {
   async getAll(options) {
     return await knex
       .from('person')
       .select()
-      .orderBy('name');
+      .orderBy('id');
   },
 
   async get(id) {
@@ -13,26 +15,17 @@ module.exports = {
       .from('person')
       .select()
       .where({ id });
-    const events = await knex
-      .from('event')
-      .select()
-      .where({ teamId: person.teamId });
-    const [team] = await knex
-      .from('team')
-      .select()
-      .where({ id: person.teamId });
+    if (!person) {
+      return null;
+    }
+    const eventsPromise = common.event.getForTeamAndPerson(person.teamId, id);
+    const teamsPromise = common.team.getNoDeps(person.teamId);
+    const [teamObj, events] = await Promise.all([teamsPromise, eventsPromise]);
     return {
       ...person,
       events,
-      team,
+      team: teamObj,
     };
-  },
-
-  async getForTeam(teamId) {
-    return await knex
-      .from('person')
-      .select()
-      .where({ teamId });
   },
 
   async insert(name, teamId) {

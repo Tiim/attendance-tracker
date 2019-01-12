@@ -1,7 +1,6 @@
 const { knex } = require('../db');
 
-const event = require('./event');
-const person = require('./person');
+const common = require('./common');
 
 module.exports = {
   async getAll() {
@@ -16,8 +15,8 @@ module.exports = {
       .from('team')
       .select()
       .where({ id });
-    const personsPromise = person.getForTeam(id);
-    const eventsPromise = event.getForTeam(id);
+    const personsPromise = common.person.getForTeam(id);
+    const eventsPromise = common.event.getForTeam(id);
     const [[team], persons, events] = await Promise.all([
       teamPromise,
       personsPromise,
