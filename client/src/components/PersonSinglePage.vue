@@ -3,17 +3,17 @@
     <div v-if="person">
       <h1>{{person.name}}</h1>
       <p v-if="person.team">Team: {{person.team.name}}</p>
-      <PersonAttendanceTable :personId="person.id"/>
+      <AttendanceTable :personId="person.id"/>
     </div>
   </div>
 </template> 
 
 <script>
-import PersonAttendanceTable from './PersonAttendanceTable';
+import AttendanceTable from './AttendanceTable';
 export default {
   name: 'PersonSinglePage',
   components: {
-    PersonAttendanceTable,
+    AttendanceTable,
   },
   computed: {
     person() {

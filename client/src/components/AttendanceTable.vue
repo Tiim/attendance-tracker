@@ -5,7 +5,9 @@
         <thead>
           <tr>
             <th>Name</th>
-            <th v-for="event in events" :key="event.id">{{event.date}}</th>
+            <th v-for="event in events" :key="event.id">
+              <EventTitle :event="event"/>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -23,24 +25,52 @@
 
 <script>
 import AttendanceTableEntry from './AttendanceTableEntry';
+import EventTitle from './EventTitle';
 export default {
-  name: 'PersonAttendanceTable',
+  name: 'AttendanceTable',
   props: {
+    personId: Number,
     teamId: Number,
   },
   components: {
     AttendanceTableEntry,
+    EventTitle,
   },
   computed: {
     events() {
-      return this.$store.state.event.events.filter(
-        (e) => e.teamId === this.teamId
-      );
+      let events = [];
+      if (this.teamId) {
+        events = events.concat(
+          this.$store.state.event.events.filter((e) => e.teamId == this.teamId)
+        );
+      }
+      if (this.personId) {
+        events = events.concat(
+          this.$store.state.event.events.filter(
+            (e) => e.teamId == this.personId
+          )
+        );
+      }
+      return events;
+    },
+    persons() {
+      let persons = [];
+      if (this.personId) {
+        persons = persons.push(
+          this.$store.state.person.persons.find((p) => p.id == this.personId)
+        );
+      }
+      if (this.teamId) {
+        persons = persons.concat(
+          this.$store.state.person.persons.filter(
+            (p) => p.teamId == this.teamId
+          )
+        );
+      }
+      return persons;
     },
     tableData() {
-      const persons = this.$store.state.person.persons.filter(
-        (p) => p.teamId === this.teamId
-      );
+      const persons = this.persons;
       const events = this.events;
 
       return persons.map((p) => ({
@@ -48,7 +78,7 @@ export default {
         attendances: events.map((e) => {
           const att = e.attendances || [];
           return (
-            att.find((a) => a.personId === p.id) || {
+            att.find((a) => a.personId == p.id) || {
               eventId: e.id,
               personId: p.id,
               state: 'absent',

@@ -3,7 +3,7 @@
     <div v-if="team">
       <div class="content">
         <h1>{{team.name}}</h1>
-        <TeamAttendanceTable :teamId="team.id"/>
+        <AttendanceTable :teamId="team.id"/>
       </div>
       <div class="content">
         <PersonAdd :teamId="team.id"/>
@@ -14,11 +14,11 @@
 
 <script>
 import PersonAdd from './PersonAdd';
-import TeamAttendanceTable from './TeamAttendanceTable';
+import AttendanceTable from './AttendanceTable';
 export default {
   name: 'TeamSinglePage',
   components: {
-    TeamAttendanceTable,
+    AttendanceTable,
     PersonAdd,
   },
   computed: {
