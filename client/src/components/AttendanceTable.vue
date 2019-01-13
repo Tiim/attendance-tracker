@@ -45,9 +45,10 @@ export default {
         );
       }
       if (this.personId) {
+        const person = this.persons.find((p) => p.id == this.personId);
         events = events.concat(
           this.$store.state.event.events.filter(
-            (e) => e.teamId == this.personId
+            (e) => e.teamId == person.teamId
           )
         );
       }
@@ -56,7 +57,7 @@ export default {
     persons() {
       let persons = [];
       if (this.personId) {
-        persons = persons.push(
+        persons.push(
           this.$store.state.person.persons.find((p) => p.id == this.personId)
         );
       }
