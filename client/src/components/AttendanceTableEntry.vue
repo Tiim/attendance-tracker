@@ -48,4 +48,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.button {
+  width: 36px;
+  height: 36px;
+}
 </style>
