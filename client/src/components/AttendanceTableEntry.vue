@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: 'AttendanceTable',
+  name: 'AttendanceTableEntry',
   props: {
     data: Object,
   },

@@ -5,14 +5,14 @@
         <thead>
           <tr>
             <th>Name</th>
-            <th v-for="event in events" v-bind:key="event.id">{{event.date}}</th>
+            <th v-for="event in events" :key="event.id">{{event.date}}</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>{{person.name}}</td>
-            <td v-for="data in tableData" v-bind:key="data.id">
-              <AttendanceTableEntry v-bind:data="data"/>
+            <td v-for="data in tableData" :key="data.id">
+              <AttendanceTableEntry :data="data"/>
             </td>
           </tr>
         </tbody>

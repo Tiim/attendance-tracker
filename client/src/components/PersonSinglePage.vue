@@ -3,7 +3,7 @@
     <div v-if="person">
       <h1>{{person.name}}</h1>
       <p v-if="person.team">Team: {{person.team.name}}</p>
-      <PersonAttendanceTable v-bind:personId="person.id"/>
+      <PersonAttendanceTable :personId="person.id"/>
     </div>
   </div>
 </template> 

@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import { apiUrl } from '../../config';
 
 const state = {
   events: [],
@@ -6,7 +7,15 @@ const state = {
 
 const getters = {};
 
-const actions = {};
+const eventsUrl = `${apiUrl}/events`;
+const eventUrl = (id) => `${eventsUrl}/${id}`;
+
+const actions = {
+  async loadSingle(context, id) {
+    const team = await fetch(eventUrl(id)).then((res) => res.json());
+    context.commit('setEvents', [team]);
+  },
+};
 
 const mutations = {
   setEvents(state, events) {
