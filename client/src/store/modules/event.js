@@ -8,6 +8,7 @@ const state = {
 const getters = {};
 
 const eventsUrl = `${apiUrl}/events`;
+const attendanceUrl = `${apiUrl}/events/attendance`;
 const eventUrl = (id) => `${eventsUrl}/${id}`;
 
 const actions = {
@@ -17,9 +18,18 @@ const actions = {
   },
 
   async setAttendanceState(context, state) {
-    //const { old, newState } = state;
-    //TODO: push to server
-    context.commit('setAttendanceState', state);
+    const { old, newState } = state;
+    const body = { ...old, state: newState };
+
+    const result = await fetch(attendanceUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    }).then((r) => r.json());
+
+    context.commit('setAttendanceState', result);
   },
 };
 
@@ -37,12 +47,12 @@ const mutations = {
     });
   },
   setAttendanceState(state, status) {
-    const { old, newState } = status;
-    old.state = newState;
-    const event = state.events.find((e) => e.id === old.eventId);
-    const oldAtt = event.attendances.find((a) => a.id === old.id);
+    const event = state.events.find((e) => e.id === status.eventId);
+    const oldAtt = event.attendances.find((a) => a.id === status.id);
     if (!oldAtt) {
-      event.attendances.push(old);
+      event.attendances.push(status);
+    } else {
+      oldAtt.state = status.state;
     }
   },
 };

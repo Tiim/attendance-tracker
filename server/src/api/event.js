@@ -10,5 +10,17 @@ module.exports = function(fastify, opts, next) {
     const result = await storage.event.get(id);
     reply.send(result);
   });
+
+  fastify.post('/attendance', async (req, reply) => {
+    const { id, eventId, personId, state } = req.body;
+    let newId;
+    if (id) {
+      newId = await storage.attendance.update(id, eventId, personId, state);
+    } else {
+      newId = await storage.attendance.insert(eventId, personId, state);
+    }
+    const res = await storage.attendance.getSingle(newId);
+    reply.send(res);
+  });
   next();
 };
