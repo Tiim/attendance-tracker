@@ -4,7 +4,9 @@
       <table class="table">
         <thead>
           <tr>
-            <th>Name</th>
+            <th class="nameHeader">
+              <div>Name</div>
+            </th>
             <th v-for="event in events" :key="event.id">
               <EventTitle :event="event"/>
             </th>
@@ -94,4 +96,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.nameHeader {
+  position: relative;
+}
+.nameHeader div {
+  position: absolute;
+  bottom: 5px;
+}
 </style>
