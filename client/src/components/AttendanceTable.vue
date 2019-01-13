@@ -5,7 +5,9 @@
         <thead>
           <tr>
             <th class="nameHeader">
-              <div>Name</div>
+              <div>
+                <div>Name</div>
+              </div>
             </th>
             <th v-for="event in events" :key="event.id">
               <EventTitle :event="event"/>
@@ -97,10 +99,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .nameHeader {
-  position: relative;
-}
-.nameHeader div {
-  position: absolute;
-  bottom: 5px;
+  vertical-align: bottom;
 }
 </style>
