@@ -1,4 +1,4 @@
-# Anwesenheitsliste Docs
+# Docs
 
 <!-- markdownlint-disable MD024 -->
 
