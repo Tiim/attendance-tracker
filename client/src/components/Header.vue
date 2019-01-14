@@ -3,12 +3,18 @@
     <div class="container">
       <div class="navbar-brand">
         <a class="navbar-item has-text-weight-bold" href="/">Anwesenheitsliste</a>
+        
+        <a role="button" @click="tapBurger" class="navbar-burger burger">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
       </div>
-      <div class="navbar-menu">
+      <div :class="{'navbar-menu': true, 'is-active': mobileMenuOpen}">
         <div class="navbar-start">
-          <router-link to="/" class="navbar-item">Home</router-link>
-          <router-link to="/team" class="navbar-item">Teams</router-link>
-          <router-link to="/person" class="navbar-item">People</router-link>
+          <router-link @click.native="closeBurger" to="/" class="navbar-item">Home</router-link>
+          <router-link @click.native="closeBurger" to="/team" class="navbar-item">Teams</router-link>
+          <router-link @click.native="closeBurger" to="/person" class="navbar-item">People</router-link>
         </div>
       </div>
     </div>
@@ -19,7 +25,17 @@
 export default {
   name: 'Header',
   data() {
-    return {};
+    return {
+      mobileMenuOpen: false,
+    };
+  },
+  methods: {
+    tapBurger() {
+      this.mobileMenuOpen = !this.mobileMenuOpen;
+    },
+    closeBurger() {
+      this.mobileMenuOpen = false;
+    },
   },
 };
 </script>
