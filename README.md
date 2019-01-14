@@ -7,8 +7,6 @@ _This app is still a WIP_
 
 ### Dev
 
-you need two terminals to run the backend and the frontend in dev mode
-
 ### Setup
 
 #### PostgreSQL as a Service
