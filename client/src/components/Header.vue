@@ -2,7 +2,7 @@
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="container">
       <div class="navbar-brand">
-        <a class="navbar-item has-text-weight-bold" href="/">Anwesenheitsliste</a>
+        <a class="navbar-item has-text-weight-bold" href="/">Attendance Tracker</a>
         
         <a role="button" @click="tapBurger" class="navbar-burger burger">
           <span aria-hidden="true"></span>

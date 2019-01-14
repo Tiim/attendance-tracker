@@ -52,3 +52,9 @@ npm run dev
 cd client/
 npm run dev
 ```
+
+## Screenshosts
+
+As of 2019-01-14
+![People List](https://i.imgur.com/CMQPV8v.png)
+![Attendance](https://i.imgur.com/VJepLv3.png)
