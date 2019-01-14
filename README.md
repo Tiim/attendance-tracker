@@ -1,18 +1,24 @@
-# Anwesenheitsliste
+# Attendance Tracekr
 
-## Notes
+A web app that allows you to manage and log attendances of teammembers.
+_This app is still a WIP_
 
-### Database
+## How to use
 
-- List of People (Person)
-- List of Teams
-- Person in Team (one team multiple people)
-- Team Timetable
+### Dev
 
-- Status of every practice and person
+you need two terminals to run the backend and the frontend in dev mode
 
-### Status
+Server:
 
-- absent
-- present
-- excused
+```sh
+cd server/
+npm run dev
+```
+
+Client:
+
+```sh
+cd client/
+npm run dev
+```
