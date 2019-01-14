@@ -3,7 +3,7 @@
     <footer class="footer">
       <div class="content">
         <p>
-          <strong>Anwesenheitsliste</strong>
+          <strong>Attendance Tracker</strong>
         </p>
         <p>&copy;Tim Bachmann {{year}}</p>
       </div>
