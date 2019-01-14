@@ -1,4 +1,4 @@
-# Attendance Tracekr
+# Attendance Tracker
 
 A web app that allows you to manage and log attendances of teammembers.
 _This app is still a WIP_
