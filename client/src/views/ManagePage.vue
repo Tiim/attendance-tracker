@@ -1,20 +1,19 @@
 <template>
   <div class="content">
-    <div class="content">
-      <TeamList/>
-    </div>
+    <h1>Manage</h1>
+    <ManageTeamTree/>
   </div>
 </template>
 
 <script>
-import TeamList from '../components/TeamList';
+import ManageTeamTree from '@/components/ManageTeamTree';
 export default {
-  name: 'TeamPage',
+  name: 'ManagePage',
   data() {
     return {};
   },
   components: {
-    TeamList,
+    ManageTeamTree,
   },
   created() {
     this.$store.dispatch('team/load');

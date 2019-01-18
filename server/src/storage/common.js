@@ -43,6 +43,7 @@ const person = {
 };
 
 const team = {
+  aggreagte: aggregateQuery('person', 'persons'),
   async getNoDeps(id) {
     const [team] = await knex
       .from('team')

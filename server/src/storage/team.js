@@ -6,8 +6,10 @@ module.exports = {
   async getAll() {
     return await knex
       .from('team')
-      .select('id', 'name')
-      .orderBy('name');
+      .select('team.id', 'team.name', knex.raw(common.team.aggreagte))
+      .orderBy('team.name')
+      .leftJoin('person', { 'person.teamId': 'team.id' })
+      .groupBy('team.id');
   },
 
   async get(id) {

@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import Index from '@/views/Index';
+import IndexPage from '@/views/IndexPage';
 
 Vue.use(Router);
 
@@ -11,7 +11,7 @@ export default new Router({
     {
       path: '/',
       name: 'index',
-      component: Index,
+      component: IndexPage,
     },
     {
       path: '/team',
@@ -36,6 +36,12 @@ export default new Router({
       name: 'person',
       component: () =>
         import(/* webpackChunkName: "person" */ '@/views/PersonSinglePage'),
+    },
+    {
+      path: '/manage',
+      name: 'manage',
+      component: () =>
+        import(/* webpackChunkName: "organize" */ '@/views/ManagePage'),
     },
     {
       path: '/404',

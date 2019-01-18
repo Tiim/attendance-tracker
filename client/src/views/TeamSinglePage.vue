@@ -10,13 +10,11 @@
 </template>
 
 <script>
-import PersonAdd from '../components/PersonAdd';
 import AttendanceTable from '../components/AttendanceTable';
 export default {
   name: 'TeamSinglePage',
   components: {
     AttendanceTable,
-    PersonAdd,
   },
   computed: {
     team() {

@@ -8,12 +8,10 @@
 </template>
 
 <script>
-import PersonAdd from '../components/PersonAdd';
 import PersonList from '../components/PersonList';
 export default {
   name: 'PersonPage',
   components: {
-    PersonAdd,
     PersonList,
   },
   created() {

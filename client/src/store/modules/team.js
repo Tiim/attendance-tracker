@@ -13,6 +13,12 @@ const teamUrl = (id) => `${teamsUrl}/${id}`;
 const actions = {
   async load(context) {
     const teams = await fetch(teamsUrl).then((res) => res.json());
+    const persons = teams.flatMap((t) => {
+      const p = t.persons;
+      delete t.persons;
+      return p;
+    });
+    context.commit('person/setPersons', persons, { root: true });
     context.commit('setTeams', teams);
   },
 

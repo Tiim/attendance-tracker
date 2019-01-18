@@ -15,6 +15,7 @@
           <router-link @click.native="closeBurger" to="/" class="navbar-item">Home</router-link>
           <router-link @click.native="closeBurger" to="/team" class="navbar-item">Teams</router-link>
           <router-link @click.native="closeBurger" to="/person" class="navbar-item">People</router-link>
+          <router-link @click.native="closeBurger" to="/manage" class="navbar-item">Manage</router-link>
         </div>
       </div>
     </div>
