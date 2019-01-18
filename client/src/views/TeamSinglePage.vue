@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import PersonAdd from './PersonAdd';
-import AttendanceTable from './AttendanceTable';
+import PersonAdd from '../components/PersonAdd';
+import AttendanceTable from '../components/AttendanceTable';
 export default {
   name: 'TeamSinglePage',
   components: {

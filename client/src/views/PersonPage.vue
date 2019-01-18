@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import PersonAdd from './PersonAdd';
-import PersonList from './PersonList';
+import PersonAdd from '../components/PersonAdd';
+import PersonList from '../components/PersonList';
 export default {
   name: 'PersonPage',
   components: {

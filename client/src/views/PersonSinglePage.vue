@@ -9,7 +9,7 @@
 </template> 
 
 <script>
-import AttendanceTable from './AttendanceTable';
+import AttendanceTable from '../components/AttendanceTable';
 export default {
   name: 'PersonSinglePage',
   components: {

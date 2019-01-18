@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import TeamAdd from './TeamAdd';
-import TeamList from './TeamList';
+import TeamAdd from '../components/TeamAdd';
+import TeamList from '../components/TeamList';
 export default {
   name: 'TeamPage',
   data() {

@@ -1,12 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import Index from '@/components/Index';
-import TeamPage from '@/components/TeamPage';
-import TeamSinglePage from '@/components/TeamSinglePage';
-import PersonPage from '@/components/PersonPage';
-import PersonSinglePage from '@/components/PersonSinglePage';
-import NotFoundPage from '@/components/NotFoundPage';
+import Index from '@/views/Index';
 
 Vue.use(Router);
 
@@ -21,27 +16,32 @@ export default new Router({
     {
       path: '/team',
       name: 'teams',
-      component: TeamPage,
+      component: () =>
+        import(/* webpackChunkName: "teams" */ '@/views/TeamPage'),
     },
     {
       path: '/team/:id',
       name: 'team',
-      component: TeamSinglePage,
+      component: () =>
+        import(/* webpackChunkName: "team" */ '@/views/TeamSinglePage'),
     },
     {
       path: '/person',
       name: 'people',
-      component: PersonPage,
+      component: () =>
+        import(/* webpackChunkName: "people" */ '@/views/PersonPage'),
     },
     {
       path: '/person/:id',
       name: 'person',
-      component: PersonSinglePage,
+      component: () =>
+        import(/* webpackChunkName: "person" */ '@/views/PersonSinglePage'),
     },
     {
       path: '/404',
       name: '404',
-      component: NotFoundPage,
+      component: () =>
+        import(/* webpackChunkName: "404" */ '@/views/NotFoundPage'),
     },
     {
       path: '*',
