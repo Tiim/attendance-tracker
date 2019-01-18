@@ -3,9 +3,6 @@
     <div class="content">
       <TeamList/>
     </div>
-    <div class="content">
-      <TeamAdd/>
-    </div>
   </div>
 </template>
 

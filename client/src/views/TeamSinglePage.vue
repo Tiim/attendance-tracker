@@ -5,9 +5,6 @@
         <h1>{{team.name}}</h1>
         <AttendanceTable :teamId="team.id"/>
       </div>
-      <div class="content">
-        <PersonAdd :teamId="team.id"/>
-      </div>
     </div>
   </div>
 </template>

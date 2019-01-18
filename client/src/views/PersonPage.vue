@@ -4,9 +4,6 @@
       <h1 class="title">People</h1>
       <PersonList/>
     </div>
-    <div class="content">
-      <PersonAdd/>
-    </div>
   </div>
 </template>
 

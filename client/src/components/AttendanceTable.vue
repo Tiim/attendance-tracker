@@ -29,7 +29,7 @@
 
 <script>
 import AttendanceTableEntry from './AttendanceTableEntry';
-import EventTitle from './EventTitle';
+import EventTitle from './AttendanceTableEventTitle';
 export default {
   name: 'AttendanceTable',
   props: {
