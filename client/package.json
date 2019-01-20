@@ -6,7 +6,7 @@
     "start": "echo \"Error: no start script available. Use 'npm run dev' or 'npm run build'\" && exit 1",
     "dev": "npm run serve",
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "npm run lint && vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {

@@ -4,19 +4,19 @@
       <h4>Add Person to #{{teamId?teamId:''}}</h4>
       <div class="field">
         <p class="control">
-          <input class="input" type="text" v-model="name" placeholder="Name">
+          <input v-model="name" class="input" type="text" placeholder="Name">
         </p>
       </div>
-      <div class="field" v-if="errors.length">
+      <div v-if="errors.length" class="field">
         <div class="notification is-warning">
           <dl class="content">
-            <dt v-for="e in errors" v-bind:key="e">{{e}}</dt>
+            <dt v-for="e in errors" :key="e">{{e}}</dt>
           </dl>
         </div>
       </div>
       <div class="field">
         <p class="control">
-          <button @click="submit" class="button is-link">Add Person</button>
+          <button class="button is-link" @click="submit">Add Person</button>
         </p>
       </div>
     </div>
@@ -27,12 +27,6 @@
 <script>
 export default {
   name: 'TeamAdd',
-  data() {
-    return {
-      errors: [],
-      name: '',
-    };
-  },
 
   props: {
     teamId: {
@@ -40,6 +34,12 @@ export default {
       required: false,
       default: () => null,
     },
+  },
+  data() {
+    return {
+      errors: [],
+      name: '',
+    };
   },
 
   methods: {

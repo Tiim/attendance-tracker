@@ -3,7 +3,7 @@
     <h1 class="title">Teams</h1>
     <div class="menu">
       <ul class="menu-list">
-        <li v-for="team in teams" v-bind:key="team.id">
+        <li v-for="team in teams" :key="team.id">
           <router-link
             :to="{ name: 'team', params: { id: team.id }}"
             class="has-text-weight-semibold"

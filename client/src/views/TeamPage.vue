@@ -10,11 +10,11 @@
 import TeamList from '../components/TeamList';
 export default {
   name: 'TeamPage',
-  data() {
-    return {};
-  },
   components: {
     TeamList,
+  },
+  data() {
+    return {};
   },
   created() {
     this.$store.dispatch('team/load');

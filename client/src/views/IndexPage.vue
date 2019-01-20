@@ -8,10 +8,10 @@
 <script>
 export default {
   name: 'Index',
+  components: {},
   data() {
     return {};
   },
-  components: {},
 };
 </script>
 <style scoped>

@@ -4,12 +4,12 @@
       <h4>Add Team</h4>
       <div class="field">
         <p class="control">
-          <input class="input" type="text" v-model="name" placeholder="Team Name">
+          <input v-model="name" class="input" type="text" placeholder="Team Name">
         </p>
       </div>
       <div class="field">
         <p class="control">
-          <button @click="submit" class="button is-link">Add Team</button>
+          <button class="button is-link" @click="submit">Add Team</button>
         </p>
       </div>
     </div>

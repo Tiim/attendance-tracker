@@ -8,7 +8,12 @@
 export default {
   name: 'EventTitle',
   props: {
-    event: Object,
+    event: {
+      type: Object,
+      default: () => ({
+        date: new Date(),
+      }),
+    },
   },
   computed: {
     text() {

@@ -9,11 +9,11 @@
 import ManageTeamTree from '@/components/ManageTeamTree';
 export default {
   name: 'ManagePage',
-  data() {
-    return {};
-  },
   components: {
     ManageTeamTree,
+  },
+  data() {
+    return {};
   },
   created() {
     this.$store.dispatch('team/load');

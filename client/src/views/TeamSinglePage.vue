@@ -3,7 +3,7 @@
     <div v-if="team">
       <div class="content">
         <h1>{{team.name}}</h1>
-        <AttendanceTable :teamId="team.id"/>
+        <AttendanceTable :team-id="team.id"/>
       </div>
     </div>
   </div>

@@ -2,7 +2,7 @@
   <div>
     <div class="menu">
       <ul class="menu-list">
-        <li v-for="person in persons" v-bind:key="person.id">
+        <li v-for="person in persons" :key="person.id">
           <router-link :to="{name: 'person', params: {id: person.id}}">{{person.name}}</router-link>
         </li>
       </ul>

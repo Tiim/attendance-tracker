@@ -32,13 +32,13 @@ import AttendanceTableEntry from './AttendanceTableEntry';
 import EventTitle from './AttendanceTableEventTitle';
 export default {
   name: 'AttendanceTable',
-  props: {
-    personId: Number,
-    teamId: Number,
-  },
   components: {
     AttendanceTableEntry,
     EventTitle,
+  },
+  props: {
+    personId: { type: Number, default: () => undefined },
+    teamId: { type: Number, default: () => undefined },
   },
   computed: {
     events() {

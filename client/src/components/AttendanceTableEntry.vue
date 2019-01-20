@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button v-on:click="onClick" :class="classes">{{text}}</button>
+    <button :class="classes" @click="onClick">{{text}}</button>
   </div>
 </template>
 
@@ -8,21 +8,7 @@
 export default {
   name: 'AttendanceTableEntry',
   props: {
-    data: Object,
-  },
-  methods: {
-    onClick() {
-      const cycle = {
-        present: 'excused',
-        absent: 'present',
-        excused: 'absent',
-      };
-      const newState = cycle[this.data.state];
-      this.$store.dispatch('event/setAttendanceState', {
-        old: this.data,
-        newState,
-      });
-    },
+    data: { type: Object, default: () => ({ state: 'absent' }) },
   },
   computed: {
     text() {
@@ -41,6 +27,20 @@ export default {
         excused: 'is-warning',
       };
       return [...classes, colors[this.data.state]];
+    },
+  },
+  methods: {
+    onClick() {
+      const cycle = {
+        present: 'excused',
+        absent: 'present',
+        excused: 'absent',
+      };
+      const newState = cycle[this.data.state];
+      this.$store.dispatch('event/setAttendanceState', {
+        old: this.data,
+        newState,
+      });
     },
   },
 };
