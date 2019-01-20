@@ -1,3 +1,4 @@
+/* eslint-disable node/no-unpublished-require */
 const { knex } = require('../src/db');
 const knexCleaner = require('knex-cleaner');
 
@@ -17,9 +18,9 @@ knexCleaner
     await person.insert('Maxine Leung', team2);
 
     console.log('inserting events');
-    const event1 = await event.insert(new Date(2019, 01, 1), team1);
-    const event2 = await event.insert(new Date(2019, 01, 2), team1);
-    const event3 = await event.insert(new Date(2019, 02, 2), team2);
+    const event1 = await event.insert(new Date(2019, 1, 1), team1);
+    const event2 = await event.insert(new Date(2019, 1, 2), team1);
+    await event.insert(new Date(2019, 2, 2), team2);
 
     console.log('inserting attendance');
     await attendance.insert(event1, person1, 'present');

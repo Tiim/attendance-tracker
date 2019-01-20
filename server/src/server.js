@@ -25,7 +25,7 @@ const startServer = async () => {
     console.log(`Listening on http://localhost:${port}`);
   } catch (err) {
     console.log(`Error ${err}`);
-    process.exit(1);
+    throw err;
   }
 };
 

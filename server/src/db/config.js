@@ -1,4 +1,5 @@
-const config = require('../config');
+// Load config for env variables
+require('../config');
 
 const connection = process.env.DATABASE_CONNECTION_URL
   ? process.env.DATABASE_CONNECTION_URL

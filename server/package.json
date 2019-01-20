@@ -3,10 +3,14 @@
   "version": "0.0.1",
   "description": "Anwesenheitsliste Server",
   "main": "src/index.js",
+  "engines": {
+    "node": ">=11.0.0"
+  },
   "scripts": {
     "dev": "nodemon src/index.js",
     "start": "node src/index.js",
-    "test": "mocha"
+    "test": "npm run lint && mocha",
+    "lint": "eslint ."
   },
   "author": "Tim Bachmann",
   "license": "MIT",
@@ -20,6 +24,10 @@
   },
   "devDependencies": {
     "dotenv": "^6.2.0",
+    "eslint": "^5.12.1",
+    "eslint-config-prettier": "^3.6.0",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-prettier": "^3.0.1",
     "knex-cleaner": "^1.1.4",
     "nodemon": "^1.18.9",
     "prettier": "^1.15.3"

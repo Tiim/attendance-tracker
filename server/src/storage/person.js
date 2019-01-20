@@ -3,7 +3,7 @@ const { knex } = require('../db');
 const common = require('./common');
 
 module.exports = {
-  async getAll(options) {
+  async getAll() {
     return await knex
       .from('person')
       .select()
