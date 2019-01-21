@@ -34,4 +34,21 @@ module.exports = {
       .returning('id');
     return ret[0];
   },
+
+  async exists(id) {
+    const ret = await knex
+      .from('person')
+      .select()
+      .where({ id })
+      .limit(1);
+    return ret.length > 0;
+  },
+
+  async update(id, name, teamId) {
+    const ret = await knex('team')
+      .update({ name, teamId })
+      .where({ id })
+      .returning('id');
+    return ret[0];
+  },
 };
