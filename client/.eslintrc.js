@@ -5,7 +5,7 @@ module.exports = {
   },
   extends: ['eslint:recommended', 'plugin:vue/recommended', '@vue/prettier'],
   rules: {
-    'prettier/prettier': 'error',
+    'prettier/prettier': 'warn',
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
   },
