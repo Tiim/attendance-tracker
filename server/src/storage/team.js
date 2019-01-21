@@ -55,4 +55,10 @@ module.exports = {
       .limit(1);
     return ret.length > 0;
   },
+
+  async delete(id) {
+    await knex('team')
+      .where({ id })
+      .del();
+  },
 };
