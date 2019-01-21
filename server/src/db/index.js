@@ -1,12 +1,13 @@
+const rootConfig = require('../config');
 const config = require('./config');
 const knex = require('knex')(config);
 
 const createTableIfNotExists = async (name, callback) => {
   const exists = await knex.schema.hasTable(name);
   if (exists) {
-    console.log(`Table '${name}' exists, skipping`);
+    if (!rootConfig.isTest) console.log(`Table '${name}' exists, skipping`);
   } else {
-    console.log(`Table '${name}' does not exist`);
+    if (!rootConfig.isTest) console.log(`Table '${name}' does not exist`);
     await knex.schema.createTable(name, callback);
   }
 };

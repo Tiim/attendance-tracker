@@ -1,17 +1,19 @@
-let res;
 try {
   /* eslint-disable node/no-unpublished-require */
-  res = require('dotenv').config();
+  require('dotenv').config();
 } catch (err) {
-  res = { error: err };
+  console.log('dotenv not installed, skipping .env reading');
 }
 
-if (res.error) {
-  console.log('.env file not loaded');
-} else {
-  console.log('.env file loaded');
+let env = process.env.NODE_ENV;
+if (!env) {
+  env = 'development';
 }
 
 module.exports = {
+  env,
+  isProduction: env === 'production',
+  isDev: env !== 'production',
+  isTest: env === 'test',
   port: process.env.PORT || 8081,
 };

@@ -11,22 +11,21 @@ const config = require('./config');
 const api = require('./api');
 
 fastify.use(cors());
-fastify.use(morgan('dev'));
+if (config.isProduction) {
+  fastify.use(morgan('common'));
+} else if (config.isDev && !config.isTest) {
+  fastify.use(morgan('dev'));
+}
 
 fastify.register(api, { prefix: '/api' });
 fastify.get('/', (req, reply) => {
   reply.send({ apis: ['/api'] });
 });
 
-const startServer = async () => {
-  try {
-    const { port } = config;
-    await fastify.listen(port, '0.0.0.0');
-    console.log(`Listening on http://localhost:${port}`);
-  } catch (err) {
-    console.log(`Error ${err}`);
-    throw err;
-  }
-};
+const { port } = config;
+fastify.listen(port, '0.0.0.0');
+if (!config.isTest) {
+  console.log(`Listening on http://localhost:${port}`);
+}
 
-module.exports = { startServer };
+module.exports = { fastify };
