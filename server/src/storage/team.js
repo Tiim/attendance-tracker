@@ -16,6 +16,7 @@ module.exports = {
     const teamPromise = knex
       .from('team')
       .select()
+      .limit(1)
       .where({ id });
     const personsPromise = common.person.getForTeam(id);
     const eventsPromise = common.event.getForTeam(id);
@@ -36,5 +37,22 @@ module.exports = {
       .insert({ name })
       .returning('id');
     return ret[0];
+  },
+
+  async update(id, name) {
+    const ret = await knex('team')
+      .update({ name })
+      .where({ id })
+      .returning('id');
+    return ret[0];
+  },
+
+  async exists(id) {
+    const ret = await knex
+      .from('team')
+      .select()
+      .where({ id })
+      .limit(1);
+    return ret.length > 0;
   },
 };

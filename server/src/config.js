@@ -8,8 +8,9 @@ try {
 
 if (res.error) {
   console.log('.env file not loaded');
+} else {
+  console.log('.env file loaded');
 }
-console.log('.env file loaded');
 
 module.exports = {
   port: process.env.PORT || 8081,

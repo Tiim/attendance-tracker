@@ -1,0 +1,14 @@
+@hostname = localhost
+@port = 8081
+@url = http://{{hostname}}:{{port}}/api
+@contentType = application/json
+@date = {{$datetime iso8601}}
+###
+PUT {{url}}/teams HTTP/1.1
+content-type: {{contentType}}
+
+{
+    "name": "Test Team {{date}}"
+}
+###
+GET {{url}}/teams/ HTTP/1.1
