@@ -1,7 +1,11 @@
 <template>
-  <div class="content">
-    <h1>Manage</h1>
-    <ManageTeamTree/>
+  <div>
+    <div class="content">
+      <h1>Manage</h1>
+    </div>
+    <div>
+      <ManageTeamTree/>
+    </div>
   </div>
 </template>
 

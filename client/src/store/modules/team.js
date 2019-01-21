@@ -30,6 +30,21 @@ const actions = {
     delete team.events;
     context.commit('setTeamSingle', team);
   },
+
+  async newTeam(context, t) {
+    const team = await fetch(teamsUrl, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(t),
+    }).then((res) => res.json());
+    context.commit('person/setPersons', team.persons, { root: true });
+    context.commit('event/setEvents', team.events, { root: true });
+    delete team.persons;
+    delete team.events;
+    context.commit('setTeamSingle', team);
+  },
 };
 
 const mutations = {

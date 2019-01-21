@@ -29,10 +29,10 @@ module.exports = {
   },
 
   async insert(name, teamId) {
-    const ret = await knex('person')
+    const [id] = await knex('person')
       .insert({ name, teamId })
       .returning('id');
-    return ret[0];
+    return this.get(id);
   },
 
   async exists(id) {
@@ -45,10 +45,10 @@ module.exports = {
   },
 
   async update(id, name, teamId) {
-    const ret = await knex('team')
+    const newId = await knex('team')
       .update({ name, teamId })
       .where({ id })
       .returning('id');
-    return ret[0];
+    return this.get(newId);
   },
 };

@@ -23,6 +23,21 @@ const actions = {
     delete person.events;
     context.commit('setPersonSingle', person);
   },
+
+  async newPerson(context, p) {
+    const person = await fetch(personsUrl, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(p),
+    }).then((res) => res.json());
+    context.commit('team/setTeamSingle', person.team, { root: true });
+    context.commit('event/setEvents', person.events, { root: true });
+    delete person.team;
+    delete person.events;
+    context.commit('setPersonSingle', person);
+  },
 };
 
 const mutations = {

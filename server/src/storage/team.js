@@ -33,18 +33,18 @@ module.exports = {
   },
 
   async insert(name) {
-    const ret = await knex('team')
+    const [id] = await knex('team')
       .insert({ name })
       .returning('id');
-    return ret[0];
+    return this.get(id);
   },
 
   async update(id, name) {
-    const ret = await knex('team')
+    const [newId] = await knex('team')
       .update({ name })
       .where({ id })
       .returning('id');
-    return ret[0];
+    return this.get(newId);
   },
 
   async exists(id) {
