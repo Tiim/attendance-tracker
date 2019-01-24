@@ -5,27 +5,29 @@ module.exports = function(fastify, opts, next) {
     const result = await storage.person.getAll();
     reply.send(result);
   });
-  fastify.get('/:id', async (req, reply) => {
-    const { id } = req.params;
-    const result = await storage.person.get(id);
+
+  fastify.put('/', async (req, reply) => {
+    const res = await storage.person.upsert(req.body);
+    reply.send(res);
+  });
+
+  fastify.get('/:personId', async (req, reply) => {
+    const { personId } = req.params;
+    const result = await storage.person.get(personId);
     reply.send(result);
   });
 
-  fastify.put('/', async (req, reply) => {
-    const person = req.body;
+  fastify.delete('/:personId', async (req, reply) => {
+    const { personId } = req.params;
+    await storage.person.delete(personId);
+    reply.send();
+  });
 
-    if (person.id && (await storage.person.exists(person.id))) {
-      await storage.person.update(person.id, person.name, person.teamId);
-      reply.code(200).send();
-    } else {
-      const rep = await storage.person.insert(person.name, person.teamId);
-      reply.code(201).send(rep);
-    }
+  fastify.get('/:personId/events', async (req, reply) => {
+    const { personId } = req.params;
+    const events = await storage.mixed.eventForPerson(personId);
+    reply.send(events);
   });
-  fastify.delete('/:id', async (req, reply) => {
-    const { id } = req.params;
-    await storage.person.delete(id);
-    reply.status(200).send();
-  });
+
   next();
 };

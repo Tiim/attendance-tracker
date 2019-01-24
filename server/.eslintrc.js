@@ -7,6 +7,7 @@ module.exports = {
   extends: ['eslint:recommended', 'plugin:node/recommended', 'prettier'],
   plugins: ['prettier'],
   rules: {
+    'no-unused-vars': 'warn',
     'prettier/prettier': 'warn',
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',

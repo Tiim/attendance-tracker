@@ -5,27 +5,36 @@ module.exports = function(fastify, opts, next) {
     const result = await storage.team.getAll();
     reply.send(result);
   });
-  fastify.get('/:id', async (req, reply) => {
-    const { id } = req.params;
-    const result = await storage.team.get(id);
-    reply.send(result);
-  });
 
   fastify.put('/', async (req, reply) => {
     const team = req.body;
 
     if (team.id && (await storage.team.exists(team.id))) {
-      await storage.team.update(team.id, team.name);
-      reply.code(200).send();
+      const rep = await storage.team.update(team.id, team.name);
+      reply.code(200).send(rep);
     } else {
       const rep = await storage.team.insert(team.name);
       reply.code(201).send(rep);
     }
   });
-  fastify.delete('/:id', async (req, reply) => {
-    const { id } = req.params;
-    await storage.team.delete(id);
+
+  fastify.delete('/:teamId', async (req, reply) => {
+    const { teamId } = req.params;
+    await storage.team.delete(teamId);
     reply.status(200).send();
   });
+
+  fastify.get('/:teamId/persons', async (req, reply) => {
+    const { teamId } = req.params;
+    const persons = await storage.mixed.personForTeam(teamId);
+    reply.send(persons);
+  });
+
+  fastify.get('/:teamId/events', async (req, reply) => {
+    const { teamId } = req.params;
+    const events = await storage.mixed.eventForTeam(teamId);
+    reply.send(events);
+  });
+
   next();
 };

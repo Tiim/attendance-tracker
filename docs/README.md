@@ -109,3 +109,8 @@ Returns the [Events Object](#Events Object)
 #### DELETE /events/:eventId
 
 Deletes the event with the id `eventId`
+
+#### PUT /events/attendance
+
+Creates or updates an attendance entry.
+Expects an [Attendance Object](#Event Object) in the body. The id property should be left blank if a new event should be created.

@@ -1,13 +1,16 @@
 const { knex } = require('../db');
 
-const common = require('./common');
-
 module.exports = {
-  async getAll() {
-    return await knex
-      .from('person')
-      .select()
-      .orderBy('id');
+  async exists(id) {
+    if (!id) {
+      return false;
+    }
+    const ret = await knex
+      .from('event')
+      .select(id)
+      .where({ id })
+      .limit(1);
+    return ret.length > 0;
   },
 
   async get(id) {
@@ -15,40 +18,26 @@ module.exports = {
       .from('person')
       .select()
       .where({ id });
-    if (!person) {
-      return null;
-    }
-    const eventsPromise = common.event.getForTeamAndPerson(person.teamId, id);
-    const teamsPromise = common.team.getNoDeps(person.teamId);
-    const [teamObj, events] = await Promise.all([teamsPromise, eventsPromise]);
-    return {
-      ...person,
-      events,
-      team: teamObj,
-    };
+    return person;
   },
 
-  async insert(name, teamId) {
-    const [id] = await knex('person')
-      .insert({ name, teamId })
-      .returning('id');
-    return this.get(id);
-  },
-
-  async exists(id) {
-    const ret = await knex
+  async getAll() {
+    return await knex
       .from('person')
       .select()
-      .where({ id })
-      .limit(1);
-    return ret.length > 0;
+      .orderBy('name');
   },
 
-  async update(id, name, teamId) {
-    const newId = await knex('team')
-      .update({ name, teamId })
-      .where({ id })
-      .returning('id');
-    return this.get(newId);
+  async upsert({ id, name, teamId }) {
+    if (this.exists(id)) {
+      await knex('event')
+        .where({ id })
+        .update({ name, teamId });
+    } else {
+      id = await knex('person')
+        .insert({ name, teamId })
+        .returning('id');
+    }
+    return this.get(id);
   },
 };
