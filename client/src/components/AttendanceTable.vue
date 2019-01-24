@@ -112,7 +112,7 @@ export default {
     newEvent(event) {
       this.addEventActive = false;
       const teamId = this.teamId || this.persons[0].teamId;
-      this.$store.dispatch('event/addNewEvent', { ...event, teamId });
+      this.$store.dispatch('event/newEvent', { ...event, teamId });
     },
   },
 };

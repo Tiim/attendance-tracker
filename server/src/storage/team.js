@@ -8,6 +8,9 @@ module.exports = {
   },
 
   async exists(id) {
+    if (!id) {
+      return false;
+    }
     const ret = await knex
       .from('team')
       .select()
@@ -17,7 +20,7 @@ module.exports = {
   },
 
   async get(id) {
-    const team = await knex
+    const [team] = await knex
       .from('team')
       .select()
       .limit(1)
@@ -32,7 +35,7 @@ module.exports = {
       .orderBy('team.name');
   },
 
-  async insert({ id, name }) {
+  async upsert({ id, name }) {
     if (await this.exists(id)) {
       await knex('team')
         .update({ name })

@@ -15,7 +15,7 @@ const actions = {
     context.commit('setTeams', teams);
   },
 
-  async new(context, t) {
+  async newTeam(context, t) {
     const team = await fetch(teamsUrl, {
       method: 'PUT',
       headers: {
