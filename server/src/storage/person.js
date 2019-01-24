@@ -29,15 +29,16 @@ module.exports = {
   },
 
   async upsert({ id, name, teamId }) {
-    if (this.exists(id)) {
+    if (await this.exists(id)) {
       await knex('event')
         .where({ id })
         .update({ name, teamId });
     } else {
-      id = await knex('person')
+      [id] = await knex('person')
         .insert({ name, teamId })
         .returning('id');
     }
+    console.log(id);
     return this.get(id);
   },
 };

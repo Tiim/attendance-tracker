@@ -21,6 +21,7 @@ export default {
   },
   created() {
     this.$store.dispatch('team/load');
+    this.$store.dispatch('person/load');
   },
 };
 </script>

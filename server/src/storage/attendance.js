@@ -22,12 +22,12 @@ module.exports = {
   },
 
   async upsert({ id, eventId, personId, state }) {
-    if (this.exists(id)) {
+    if (await this.exists(id)) {
       await knex('attendance')
         .where({ id })
         .update({ eventId, personId, state });
     } else {
-      id = await knex('attendance')
+      [id] = await knex('attendance')
         .insert({ eventId, personId, state })
         .returning('id');
     }

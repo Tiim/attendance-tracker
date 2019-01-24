@@ -23,7 +23,8 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch('person/loadSingle', this.$route.params.id);
+    this.$store.dispatch('person/load');
+    this.$store.dispatch('event/loadForPerson', this.$route.params.id);
   },
 };
 </script>

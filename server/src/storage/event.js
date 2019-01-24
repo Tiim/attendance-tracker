@@ -1,7 +1,7 @@
 const { knex } = require('../db');
 const { aggregateQuery } = require('./aggregate');
 
-const aggregate = aggregateQuery('event', 'events');
+const aggregate = aggregateQuery('attendance', 'attendances');
 
 module.exports = {
   async delete(id) {
@@ -42,12 +42,12 @@ module.exports = {
   },
 
   async upsert({ id, date, teamId }) {
-    if (this.exists(id)) {
+    if (await this.exists(id)) {
       await knex('event')
         .where({ id })
         .update({ date, teamId });
     } else {
-      id = await knex('event')
+      [id] = await knex('event')
         .insert({ date, teamId })
         .returning('id');
     }

@@ -24,11 +24,9 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch('team/loadSingle', this.$route.params.id).then(() => {
-      this.$store.state.event.events
-        .filter((e) => e.teamId === this.team.id)
-        .forEach((e) => this.$store.dispatch('event/loadSingle', e.id));
-    });
+    this.$store.dispatch('team/load', this.$route.params.id);
+    this.$store.dispatch('event/loadForTeam', this.$route.params.id);
+    this.$store.dispatch('person/loadForTeam', this.$route.params.id);
   },
 };
 </script>

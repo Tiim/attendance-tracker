@@ -10,19 +10,33 @@ const getters = {};
 const eventsUrl = `${apiUrl}/events`;
 const attendanceUrl = `${apiUrl}/events/attendance`;
 const eventUrl = (id) => `${eventsUrl}/${id}`;
+const forPersonUrl = (id) => `${apiUrl}/persons/${id}/events`;
+const forTeamUrl = (id) => `${apiUrl}/teams/${id}/events`;
 
 const actions = {
   async loadSingle(context, id) {
-    const team = await fetch(eventUrl(id)).then((res) => res.json());
-    context.commit('setEvents', [team]);
+    const event = await fetch(eventUrl(id)).then((res) => res.json());
+    context.commit('setEvents', [event]);
   },
 
-  async setAttendanceState(context, state) {
+  async loadForPerson(context, personId) {
+    const events = await fetch(forPersonUrl(personId)).then((res) =>
+      res.json()
+    );
+    context.commit('setEvents', events);
+  },
+
+  async loadForTeam(context, teamId) {
+    const events = await fetch(forTeamUrl(teamId)).then((res) => res.json());
+    context.commit('setEvents', events);
+  },
+
+  async newAttendanceState(context, state) {
     const { old, newState } = state;
     const body = { ...old, state: newState };
 
     const result = await fetch(attendanceUrl, {
-      method: 'POST',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -32,9 +46,9 @@ const actions = {
     context.commit('setAttendanceState', result);
   },
 
-  async addNewEvent(context, event) {
+  async newEvent(context, event) {
     const result = await fetch(eventsUrl, {
-      method: 'POST',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },

@@ -33,12 +33,12 @@ module.exports = {
   },
 
   async insert({ id, name }) {
-    if (this.exists(id)) {
+    if (await this.exists(id)) {
       await knex('team')
         .update({ name })
         .where({ id });
     } else {
-      id = await knex('team')
+      [id] = await knex('team')
         .insert({ name })
         .returning('id');
     }

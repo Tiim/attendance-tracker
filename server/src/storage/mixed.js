@@ -4,18 +4,23 @@ const event = require('./event');
 
 const { aggregateQuery } = require('./aggregate');
 
-const aggregate = aggregateQuery('event', 'events');
+const attendanceAggregate = aggregateQuery('attendance', 'attendances');
 
 module.exports = {
   async eventForPerson(personId) {
     const { teamId } = await person.get(personId);
-    return this.eventsForTeam(teamId);
+    return this.eventForTeam(teamId);
   },
 
   async eventForTeam(teamId) {
     return await knex
       .from('event')
-      .select('event.id', 'event.date', 'event.teamId', knex.raw(aggregate))
+      .select(
+        'event.id',
+        'event.date',
+        'event.teamId',
+        knex.raw(attendanceAggregate)
+      )
       .where({ 'event.teamId': teamId })
       .leftJoin('attendance', { 'event.id': 'attendance.eventId' })
       .groupBy('event.id');

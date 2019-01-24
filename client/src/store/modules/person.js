@@ -8,20 +8,17 @@ const state = {
 const getters = {};
 
 const personsUrl = `${apiUrl}/persons`;
-const personUrl = (id) => `${personsUrl}/${id}`;
+const forTeamUrl = (id) => `${apiUrl}/teams/${id}/persons`;
 
 const actions = {
   async load(context) {
     const persons = await fetch(personsUrl).then((res) => res.json());
     context.commit('setPersons', persons);
   },
-  async loadSingle(context, id) {
-    const person = await fetch(personUrl(id)).then((res) => res.json());
-    context.commit('team/setTeamSingle', person.team, { root: true });
-    context.commit('event/setEvents', person.events, { root: true });
-    delete person.team;
-    delete person.events;
-    context.commit('setPersonSingle', person);
+
+  async loadForTeam(context, teamId) {
+    const events = await fetch(forTeamUrl(teamId)).then((res) => res.json());
+    context.commit('setPersons', events);
   },
 
   async newPerson(context, p) {
@@ -32,11 +29,7 @@ const actions = {
       },
       body: JSON.stringify(p),
     }).then((res) => res.json());
-    context.commit('team/setTeamSingle', person.team, { root: true });
-    context.commit('event/setEvents', person.events, { root: true });
-    delete person.team;
-    delete person.events;
-    context.commit('setPersonSingle', person);
+    context.commit('setPersons', [person]);
   },
 };
 
