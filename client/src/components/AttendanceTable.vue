@@ -4,13 +4,16 @@
       <table class="table">
         <thead>
           <tr>
-            <th class="nameHeader">
+            <th class="headerBottom">
               <div>
                 <div>Name</div>
               </div>
             </th>
             <th v-for="event in events" :key="event.id">
               <EventTitle :event="event"/>
+            </th>
+            <th class="headerBottom">
+              <a class="button" @click="addEvent()">+</a>
             </th>
           </tr>
         </thead>
@@ -20,25 +23,34 @@
             <td v-for="att in data.attendances" :key="att.eventId +''+ att.personId">
               <AttendanceTableEntry :data="att"/>
             </td>
+            <td></td>
           </tr>
         </tbody>
       </table>
     </div>
+    <AddEventPopover v-if="addEventActive" @exit="addEventActive = false" @save="newEvent($event)"/>
   </div>
 </template>
 
 <script>
+import AddEventPopover from './AddEventPopover';
 import AttendanceTableEntry from './AttendanceTableEntry';
 import EventTitle from './AttendanceTableEventTitle';
 export default {
   name: 'AttendanceTable',
   components: {
+    AddEventPopover,
     AttendanceTableEntry,
     EventTitle,
   },
   props: {
     personId: { type: Number, default: () => undefined },
     teamId: { type: Number, default: () => undefined },
+  },
+  data() {
+    return {
+      addEventActive: false,
+    };
   },
   computed: {
     events() {
@@ -93,12 +105,22 @@ export default {
       }));
     },
   },
+  methods: {
+    addEvent() {
+      this.addEventActive = true;
+    },
+    newEvent(event) {
+      this.addEventActive = false;
+      const teamId = this.teamId || this.persons[0].teamId;
+      this.$store.dispatch('event/addNewEvent', { ...event, teamId });
+    },
+  },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.nameHeader {
+.headerBottom {
   vertical-align: bottom;
 }
 </style>

@@ -31,6 +31,18 @@ const actions = {
 
     context.commit('setAttendanceState', result);
   },
+
+  async addNewEvent(context, event) {
+    const result = await fetch(eventsUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(event),
+    }).then((r) => r.json());
+
+    context.commit('setEvents', [result]);
+  },
 };
 
 const mutations = {

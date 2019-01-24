@@ -35,6 +35,6 @@ module.exports = {
     const ret = await knex('event')
       .insert({ date, teamId })
       .returning('id');
-    return ret[0];
+    return this.get(ret[0]);
   },
 };

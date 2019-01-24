@@ -10,6 +10,13 @@ module.exports = function(fastify, opts, next) {
     const result = await storage.event.get(id);
     reply.send(result);
   });
+  fastify.post('/', async (req, reply) => {
+    const { date, teamId } = req.body;
+    const parseddate = new Date(date);
+
+    const res = await storage.event.insert(parseddate, teamId);
+    reply.send(res);
+  });
 
   fastify.post('/attendance', async (req, reply) => {
     const { id, eventId, personId, state } = req.body;
