@@ -15,12 +15,11 @@
           </div>
         </div>
         <footer class="card-footer">
-          <a href="#" class="card-footer-item" @click="exit()">Exit</a>
-          <a href="#" class="card-footer-item" @click="save()">Save</a>
+          <a class="card-footer-item" @click="exit()">Exit</a>
+          <a class="card-footer-item" @click="save()">Save</a>
         </footer>
       </div>
     </div>
-    <button class="modal-close is-large" aria-label="close"></button>
   </div>
 </template>
 <script>
