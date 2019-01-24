@@ -8,6 +8,7 @@ const state = {
 const getters = {};
 
 const teamsUrl = `${apiUrl}/teams`;
+const teamUrl = (id) => `${apiUrl}/teams/${id}`;
 
 const actions = {
   async load(context) {
@@ -25,6 +26,11 @@ const actions = {
     }).then((res) => res.json());
     context.commit('setTeams', [team]);
   },
+
+  async delete(context, teamId) {
+    await fetch(teamUrl(teamId), { method: 'DELETE' });
+    context.commit('delete', teamId);
+  },
 };
 
 const mutations = {
@@ -37,6 +43,10 @@ const mutations = {
         state.teams.push(team);
       }
     });
+  },
+  delete(state, teamId) {
+    const i = state.teams.findIndex((t) => t.id === teamId);
+    state.teams.splice(i, 1);
   },
 };
 

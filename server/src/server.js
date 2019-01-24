@@ -3,7 +3,10 @@ const cors = require('cors');
 const morgan = require('morgan');
 const fastify = Fastify({
   ignoreTrailingSlash: true,
-  logger: false,
+  logger: {
+    level: 'warn',
+    prettyPrint: { colorize: true },
+  },
 });
 
 const config = require('./config');

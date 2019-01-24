@@ -1,6 +1,12 @@
 const { knex } = require('../db');
 
 module.exports = {
+  async delete(id) {
+    await knex('person')
+      .where({ id })
+      .del();
+  },
+
   async exists(id) {
     if (!id) {
       return false;

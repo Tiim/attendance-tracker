@@ -8,6 +8,7 @@ const state = {
 const getters = {};
 
 const personsUrl = `${apiUrl}/persons`;
+const personUrl = (id) => `${apiUrl}/persons/${id}`;
 const forTeamUrl = (id) => `${apiUrl}/teams/${id}/persons`;
 
 const actions = {
@@ -31,6 +32,13 @@ const actions = {
     }).then((res) => res.json());
     context.commit('setPersons', [person]);
   },
+
+  async delete(context, id) {
+    await fetch(personUrl(id), {
+      method: 'DELETE',
+    });
+    context.commit('delete', id);
+  },
 };
 
 const mutations = {
@@ -44,13 +52,9 @@ const mutations = {
       }
     });
   },
-  setPersonSingle(state, person) {
-    const i = state.persons.findIndex((p) => p.id === person.id);
-    if (i >= 0) {
-      Vue.set(state.persons, i, Object.assign(state.persons[i], person));
-    } else {
-      state.persons.push(person);
-    }
+  delete(state, id) {
+    const i = state.persons.findIndex((t) => t.id === id);
+    state.persons.splice(i, 1);
   },
 };
 

@@ -1,6 +1,5 @@
 const { knex } = require('../db');
 const person = require('./person');
-const event = require('./event');
 
 const { aggregateQuery } = require('./aggregate');
 

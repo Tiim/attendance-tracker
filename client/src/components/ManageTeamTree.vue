@@ -7,14 +7,20 @@
       <p class="control">
         <a class="button is-small is-grouped" @click="addPersonActive = true">Add Person</a>
       </p>
+      <p v-if="selected" class="control">
+        <a class="button is-small is-grouped" @click="deleteSelected()">Delete</a>
+      </p>
     </div>
     <div class="menu">
       <ul class="menu-list">
         <li v-for="team in teams" :key="team.id">
-          <a class="is-active">{{team.name}}</a>
+          <a :class="{'is-active': activeTeam == team.id}" @click="selectTeam(team)">{{team.name}}</a>
           <ul>
             <li v-for="person in team.persons" :key="person.id">
-              <a>{{person.name}}</a>
+              <a
+                :class="{'is-active': activePerson == person.id}"
+                @click="selectPerson(person)"
+              >{{person.name}}</a>
             </li>
           </ul>
         </li>
@@ -40,12 +46,17 @@ export default {
   },
   data() {
     return {
+      activeTeam: null,
+      activePerson: null,
       addTeamActive: false,
       addPersonActive: false,
     };
   },
 
   computed: {
+    selected() {
+      return this.activeTeam || this.activePerson;
+    },
     teams() {
       return this.$store.state.team.teams.map((t) => {
         return {
@@ -65,6 +76,22 @@ export default {
     savePerson(person) {
       this.addPersonActive = false;
       this.$store.dispatch('person/newPerson', person);
+    },
+    selectTeam(team) {
+      this.activeTeam = team.id;
+      this.activePerson = null;
+    },
+    selectPerson(person) {
+      this.activeTeam = null;
+      this.activePerson = person.id;
+    },
+    deleteSelected() {
+      const id = this.selected;
+      if (this.activeTeam) {
+        this.$store.dispatch('team/delete', id);
+      } else {
+        this.$store.dispatch('person/delete', id);
+      }
     },
   },
 };
