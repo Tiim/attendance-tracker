@@ -10,7 +10,7 @@ const fastify = Fastify({
 });
 
 const config = require('./config');
-
+const { addSchema } = require('./schema');
 const api = require('./api');
 
 fastify.use(cors());
@@ -19,6 +19,8 @@ if (config.isProduction) {
 } else if (config.isDev && !config.isTest) {
   fastify.use(morgan('dev'));
 }
+
+addSchema(fastify);
 
 fastify.register(api, { prefix: '/api' });
 fastify.get('/', (req, reply) => {

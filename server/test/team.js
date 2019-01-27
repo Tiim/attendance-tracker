@@ -20,17 +20,9 @@ describe('Team', async () => {
       });
 
       res.statusCode.should.equal(201);
-      const id = JSON.parse(res.payload);
-      id.should.be.an('number');
+      const body = JSON.parse(res.payload);
 
-      const res2 = await server.inject({
-        method: 'GET',
-        url: `/api/teams/${id}`,
-      });
-
-      const body = JSON.parse(res2.payload);
       body.name.should.equal('Team 1');
-      body.id.should.be.an('number');
     });
   });
 });

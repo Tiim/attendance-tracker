@@ -29,7 +29,7 @@ module.exports = {
   },
 
   async getAll() {
-    return await knex
+    return knex
       .from('team')
       .select()
       .orderBy('team.name');
