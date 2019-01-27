@@ -14,4 +14,5 @@ module.exports = {
   version: '11.1',
   connection,
   pool: { min: 0, max: 5 },
+  maxLimit: 40,
 };

@@ -49,4 +49,6 @@ const createTables = async () => {
   });
 };
 
-module.exports = { knex, createTables, tables };
+const maxLimit = config.maxLimit;
+
+module.exports = { knex, createTables, tables, maxLimit };
