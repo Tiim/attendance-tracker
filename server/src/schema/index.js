@@ -26,7 +26,7 @@ const schema = [
         description: 'When the event starts',
       },
       teamId: { type: 'integer', description: 'The id of the parent team' },
-      attendance: {
+      attendances: {
         type: 'array',
         items: 'attendance#',
         description: 'All attendance data of this event',
