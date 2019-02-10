@@ -83,7 +83,7 @@ module.exports = function(fastify, opts, next) {
     },
     async (req, reply) => {
       const { teamId } = req.params;
-      const { limit, before } = req.querystring;
+      const { limit, before } = req.querystring || {};
       const events = await storage.mixed.eventForTeam(teamId, {
         pagination: { limit, before },
       });

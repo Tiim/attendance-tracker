@@ -70,6 +70,10 @@ module.exports = function(fastify, opts, next) {
         params: {
           personId: { type: 'integer' },
         },
+        querystring: {
+          limit: { type: 'integer' },
+          before: { type: 'string', format: 'date-time' },
+        },
         response: {
           '2xx': { type: 'array', items: 'event#' },
         },
@@ -77,7 +81,10 @@ module.exports = function(fastify, opts, next) {
     },
     async (req, reply) => {
       const { personId } = req.params;
-      const events = await storage.mixed.eventForPerson(personId);
+      const { limit, before } = req.querystring || {};
+      const events = await storage.mixed.eventForPerson(personId, {
+        pagination: { limit, before },
+      });
       reply.send(events);
     }
   );

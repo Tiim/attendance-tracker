@@ -1,4 +1,4 @@
-const { knex } = require('../db');
+const { knex, maxLimit } = require('../db');
 const person = require('./person');
 
 const { aggregateQuery } = require('./aggregate');
@@ -6,12 +6,15 @@ const { aggregateQuery } = require('./aggregate');
 const attendanceAggregate = aggregateQuery('attendance', 'attendances');
 
 module.exports = {
-  async eventForPerson(personId) {
+  async eventForPerson(personId, options) {
     const { teamId } = await person.get(personId);
-    return this.eventForTeam(teamId);
+    return this.eventForTeam(teamId, options);
   },
 
-  async eventForTeam(teamId) {
+  async eventForTeam(teamId, options) {
+    const {
+      pagination: { limit = maxLimit, before = new Date() },
+    } = options;
     return await knex
       .from('event')
       .select(
@@ -21,8 +24,10 @@ module.exports = {
         knex.raw(attendanceAggregate)
       )
       .where({ 'event.teamId': teamId })
+      .where('event.date', '<=', before)
       .leftJoin('attendance', { 'event.id': 'attendance.eventId' })
-      .groupBy('event.id');
+      .groupBy('event.id')
+      .limit(limit);
   },
 
   async personForTeam(teamId) {
