@@ -22,7 +22,7 @@ module.exports = function(fastify, opts, next) {
     '/:eventId',
     {
       schema: {
-        querystring: {
+        params: {
           eventId: { type: 'integer' },
         },
         response: {
@@ -41,7 +41,7 @@ module.exports = function(fastify, opts, next) {
     '/:eventid',
     {
       schema: {
-        querystring: {
+        params: {
           eventId: { type: 'integer' },
         },
       },

@@ -34,7 +34,7 @@ module.exports = function(fastify, opts, next) {
     '/:teamId',
     {
       schema: {
-        querystring: {
+        params: {
           teamId: { type: 'integer' },
         },
       },
@@ -50,7 +50,7 @@ module.exports = function(fastify, opts, next) {
     '/:teamId/persons',
     {
       schema: {
-        querystring: {
+        params: {
           teamId: { type: 'integer' },
         },
         response: {
@@ -69,8 +69,12 @@ module.exports = function(fastify, opts, next) {
     '/:teamId/events',
     {
       schema: {
-        querystring: {
+        params: {
           teamId: { type: 'integer' },
+        },
+        querystring: {
+          limit: { type: 'integer' },
+          before: { type: 'string', format: 'date-time' },
         },
         response: {
           '2xx': { type: 'array', items: 'event#' },
@@ -79,7 +83,10 @@ module.exports = function(fastify, opts, next) {
     },
     async (req, reply) => {
       const { teamId } = req.params;
-      const events = await storage.mixed.eventForTeam(teamId);
+      const { limit, before } = req.querystring;
+      const events = await storage.mixed.eventForTeam(teamId, {
+        pagination: { limit, before },
+      });
       reply.send(events);
     }
   );

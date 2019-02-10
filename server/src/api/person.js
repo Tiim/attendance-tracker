@@ -34,7 +34,7 @@ module.exports = function(fastify, opts, next) {
     '/:personId',
     {
       schema: {
-        querystring: {
+        params: {
           personId: { type: 'integer' },
         },
         response: { '2xx': 'person#' },
@@ -51,7 +51,7 @@ module.exports = function(fastify, opts, next) {
     '/:personId',
     {
       schema: {
-        querystring: {
+        params: {
           personId: { type: 'integer' },
         },
       },
@@ -67,7 +67,7 @@ module.exports = function(fastify, opts, next) {
     '/:personId/events',
     {
       schema: {
-        querystring: {
+        params: {
           personId: { type: 'integer' },
         },
         response: {
