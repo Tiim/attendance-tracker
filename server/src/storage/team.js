@@ -32,6 +32,7 @@ module.exports = {
     return knex
       .from('team')
       .select()
+      .where({ active: true })
       .orderBy('team.name');
   },
 
