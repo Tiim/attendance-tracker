@@ -17,6 +17,7 @@ module.exports = {
 Structure:
 
 delete(id);
+deactivate(id);
 exists(id);
 get(id);
 getAll();

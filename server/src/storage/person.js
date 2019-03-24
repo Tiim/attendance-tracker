@@ -1,10 +1,10 @@
 const { knex } = require('../db');
 
 module.exports = {
-  async delete(id) {
+  async deactivate(id) {
     await knex('person')
       .where({ id })
-      .del();
+      .update({ active: false });
   },
 
   async exists(id) {
@@ -31,20 +31,20 @@ module.exports = {
     return await knex
       .from('person')
       .select()
+      .where({ active: true })
       .orderBy('name');
   },
 
-  async upsert({ id, name, teamId }) {
+  async upsert({ id, name, teamId, active = true }) {
     if (await this.exists(id)) {
       await knex('event')
         .where({ id })
-        .update({ name, teamId });
+        .update({ name, teamId, active });
     } else {
       [id] = await knex('person')
         .insert({ name, teamId })
         .returning('id');
     }
-    console.log(id);
     return this.get(id);
   },
 };

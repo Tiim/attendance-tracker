@@ -9,17 +9,22 @@
                 <div>Name</div>
               </div>
             </th>
+            <th class="headerBottom">
+              <a class="button" @click="prev()">&lt;</a>
+            </th>
             <th v-for="event in events" :key="event.id">
               <EventTitle :event="event"/>
             </th>
             <th class="headerBottom">
               <a class="button" @click="addEvent()">+</a>
+              <a class="button" @click="next()">&gt;</a>
             </th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="data in tableData" :key="data.person.id">
             <td>{{data.person.name}}</td>
+            <td></td>
             <td v-for="att in data.attendances" :key="att.eventId +''+ att.personId">
               <AttendanceTableEntry :data="att"/>
             </td>
@@ -46,10 +51,12 @@ export default {
   props: {
     personId: { type: Number, default: () => undefined },
     teamId: { type: Number, default: () => undefined },
+    collumns: { type: Number, default: () => 8 },
   },
   data() {
     return {
       addEventActive: false,
+      offset: 0,
     };
   },
   computed: {
@@ -68,7 +75,10 @@ export default {
           )
         );
       }
-      return events;
+      return events
+        .reverse()
+        .slice(this.offset, this.offset + this.collumns)
+        .reverse();
     },
     persons() {
       let persons = [];
@@ -113,6 +123,22 @@ export default {
       this.addEventActive = false;
       const teamId = this.teamId || this.persons[0].teamId;
       this.$store.dispatch('event/newEvent', { ...event, teamId });
+    },
+    next() {
+      this.offset = Math.max(0, this.offset - this.collumns);
+    },
+    prev() {
+      if (this.events.length === 0) {
+        return;
+      }
+      const command = this.teamId ? 'loadForTeam' : 'loadForPerson';
+
+      this.$store.dispatch(`event/${command}`, {
+        id: this.teamId || this.personId,
+        limit: this.collumns,
+        before: this.events[0].date,
+      });
+      this.offset = this.offset + this.collumns;
     },
   },
 };

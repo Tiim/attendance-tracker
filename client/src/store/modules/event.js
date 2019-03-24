@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import { apiUrl } from '../../config';
+import { buildQuery } from '../../util/query';
 
 const state = {
   events: [],
@@ -10,8 +11,10 @@ const getters = {};
 const eventsUrl = `${apiUrl}/events`;
 const attendanceUrl = `${apiUrl}/events/attendance`;
 const eventUrl = (id) => `${eventsUrl}/${id}`;
-const forPersonUrl = (id) => `${apiUrl}/persons/${id}/events`;
-const forTeamUrl = (id) => `${apiUrl}/teams/${id}/events`;
+const forPersonUrl = (id, limit, before) =>
+  `${apiUrl}/persons/${id}/events?${buildQuery({ limit, before })}`;
+const forTeamUrl = (id, limit, before) =>
+  `${apiUrl}/teams/${id}/events?${buildQuery({ limit, before })}`;
 
 const actions = {
   async loadSingle(context, id) {
@@ -19,15 +22,17 @@ const actions = {
     context.commit('setEvents', [event]);
   },
 
-  async loadForPerson(context, personId) {
-    const events = await fetch(forPersonUrl(personId)).then((res) =>
+  async loadForPerson(context, { id, limit, before }) {
+    const events = await fetch(forPersonUrl(id, limit, before)).then((res) =>
       res.json()
     );
     context.commit('setEvents', events);
   },
 
-  async loadForTeam(context, teamId) {
-    const events = await fetch(forTeamUrl(teamId)).then((res) => res.json());
+  async loadForTeam(context, { id, limit, before }) {
+    const events = await fetch(forTeamUrl(id, limit, before)).then((res) =>
+      res.json()
+    );
     context.commit('setEvents', events);
   },
 
@@ -71,6 +76,10 @@ const mutations = {
         state.events.push(event);
       }
     });
+
+    state.events.sort(
+      (a, b) => (a.date > b.date ? 1 : a.date < b.date ? -1 : 0)
+    );
   },
   setAttendanceState(state, status) {
     const event = state.events.find((e) => e.id === status.eventId);

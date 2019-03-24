@@ -1,10 +1,10 @@
 const { knex } = require('../db');
 
 module.exports = {
-  async delete(id) {
+  async deactivate(id) {
     await knex('team')
       .where({ id })
-      .del();
+      .update({ active: false });
   },
 
   async exists(id) {

@@ -58,7 +58,7 @@ module.exports = function(fastify, opts, next) {
     },
     async (req, reply) => {
       const { personId } = req.params;
-      await storage.person.delete(personId);
+      await storage.person.deactivate(personId);
       reply.send();
     }
   );

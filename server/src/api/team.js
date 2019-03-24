@@ -41,7 +41,7 @@ module.exports = function(fastify, opts, next) {
     },
     async (req, reply) => {
       const { teamId } = req.params;
-      await storage.team.delete(teamId);
+      await storage.team.deactivate(teamId);
       reply.status(204).send();
     }
   );

@@ -19,6 +19,7 @@ const createTables = async () => {
   await createTableIfNotExists('team', (table) => {
     table.increments('id').primary();
     table.string('name');
+    table.boolean('active').defaultTo(true);
   });
 
   //PEOPLE
@@ -26,6 +27,7 @@ const createTables = async () => {
     table.increments('id').primary();
     table.string('name');
     table.integer('teamId');
+    table.boolean('active').defaultTo(true);
     table.foreign('teamId').references('team.id');
   });
 

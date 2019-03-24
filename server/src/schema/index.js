@@ -17,7 +17,7 @@ const schema = [
   {
     $id: 'event',
     type: 'object',
-    required: ['date', 'teamId', 'attendance'],
+    required: ['date', 'teamId'],
     properties: {
       id: { type: 'integer', description: 'The id of this object' },
       date: {
@@ -41,6 +41,10 @@ const schema = [
       id: { type: 'integer', description: 'The id of this object' },
       name: { type: 'string', description: 'The name of the person' },
       teamId: { type: 'integer', description: 'The id of the parent team' },
+      active: {
+        type: 'boolean',
+        description: 'The status if this person is still active',
+      },
     },
   },
   {
@@ -50,6 +54,10 @@ const schema = [
     properties: {
       id: { type: 'integer', description: 'The id of this object' },
       name: { type: 'string', description: 'The name of the team' },
+      active: {
+        type: 'boolean',
+        description: 'The status if this team is still active',
+      },
     },
   },
 ];

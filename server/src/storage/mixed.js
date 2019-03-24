@@ -12,9 +12,11 @@ module.exports = {
   },
 
   async eventForTeam(teamId, options) {
-    const {
+    let {
       pagination: { limit = maxLimit, before = new Date() },
     } = options;
+    before = new Date(before);
+
     return await knex
       .from('event')
       .select(
@@ -27,6 +29,7 @@ module.exports = {
       .where('event.date', '<=', before)
       .leftJoin('attendance', { 'event.id': 'attendance.eventId' })
       .groupBy('event.id')
+      .orderBy('event.date', 'desc')
       .limit(limit);
   },
 
@@ -34,6 +37,6 @@ module.exports = {
     return await knex
       .from('person')
       .select()
-      .where({ teamId });
+      .where({ teamId, active: true });
   },
 };
