@@ -81,7 +81,7 @@ module.exports = function(fastify, opts, next) {
     },
     async (req, reply) => {
       const { personId } = req.params;
-      const { limit, before } = req.querystring || {};
+      const { limit, before } = req.query || {};
       const events = await storage.mixed.eventForPerson(personId, {
         pagination: { limit, before },
       });
