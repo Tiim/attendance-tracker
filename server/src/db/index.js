@@ -29,6 +29,7 @@ const createTables = async () => {
     table.integer('teamId');
     table.boolean('active').defaultTo(true);
     table.foreign('teamId').references('team.id');
+    table.string('notes').defaultsTo('');
   });
 
   //TABLES
@@ -36,6 +37,7 @@ const createTables = async () => {
     table.increments('id').primary();
     table.dateTime('date');
     table.integer('teamId');
+    table.string('notes').defaultsTo('');
     table.foreign('teamId').references('team.id');
   });
 
