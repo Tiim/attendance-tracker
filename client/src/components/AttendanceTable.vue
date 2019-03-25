@@ -12,7 +12,7 @@
             <th class="headerBottom">
               <a class="button" @click="prev()">&lt;</a>
             </th>
-            <th v-for="event in events" :key="event.id">
+            <th v-for="event in eventsPaginated" :key="event.id">
               <EventTitle :event="event"/>
             </th>
             <th class="headerBottom">
@@ -52,6 +52,8 @@ export default {
     personId: { type: Number, default: () => undefined },
     teamId: { type: Number, default: () => undefined },
     collumns: { type: Number, default: () => 8 },
+    events: { type: Array, default: () => [] },
+    persons: { type: Array, default: () => [] },
   },
   data() {
     return {
@@ -60,45 +62,17 @@ export default {
     };
   },
   computed: {
-    events() {
-      let events = [];
-      if (this.teamId) {
-        events = events.concat(
-          this.$store.state.event.events.filter((e) => e.teamId == this.teamId)
-        );
-      }
-      if (this.personId) {
-        const person = this.persons.find((p) => p.id == this.personId);
-        events = events.concat(
-          this.$store.state.event.events.filter(
-            (e) => e.teamId == person.teamId
-          )
-        );
-      }
-      return events
+    eventsPaginated() {
+      return this.events
+        .slice()
         .reverse()
-        .slice(this.offset, this.offset + this.collumns)
+        .slice(this.offset, this.collumns + this.offset)
         .reverse();
-    },
-    persons() {
-      let persons = [];
-      if (this.personId) {
-        persons.push(
-          this.$store.state.person.persons.find((p) => p.id == this.personId)
-        );
-      }
-      if (this.teamId) {
-        persons = persons.concat(
-          this.$store.state.person.persons.filter(
-            (p) => p.teamId == this.teamId
-          )
-        );
-      }
-      return persons;
     },
     tableData() {
       const persons = this.persons;
-      const events = this.events;
+      const events = this.eventsPaginated;
+      console.log(events);
 
       return persons.map((p) => ({
         person: p,
@@ -128,7 +102,7 @@ export default {
       this.offset = Math.max(0, this.offset - this.collumns);
     },
     prev() {
-      if (this.events.length === 0) {
+      if (this.eventsPaginated.length === 0) {
         return;
       }
       const command = this.teamId ? 'loadForTeam' : 'loadForPerson';

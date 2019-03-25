@@ -3,7 +3,12 @@
     <div v-if="team">
       <div class="content">
         <h1>{{team.name}}</h1>
-        <AttendanceTable :team-id="team.id" :collumns="collumns"/>
+        <AttendanceTable
+          :team-id="team.id"
+          :collumns="collumns"
+          :events="events"
+          :persons="persons"
+        />
       </div>
     </div>
   </div>
@@ -26,6 +31,22 @@ export default {
       return this.$store.state.team.teams.find(
         (t) => t.id == this.$route.params.id
       );
+    },
+
+    events() {
+      let events = [];
+      events = events.concat(
+        this.$store.state.event.events.filter((e) => e.teamId == this.team.id)
+      );
+      return events;
+    },
+
+    persons() {
+      let persons = [];
+      persons = persons.concat(
+        this.$store.state.person.persons.filter((p) => p.teamId == this.team.id)
+      );
+      return persons;
     },
   },
   created() {

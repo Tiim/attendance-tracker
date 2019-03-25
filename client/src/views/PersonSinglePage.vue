@@ -3,7 +3,7 @@
     <div v-if="person">
       <h1>{{person.name}}</h1>
       <p v-if="person.team">Team: {{person.team.name}}</p>
-      <AttendanceTable :person-id="person.id"/>
+      <AttendanceTable :person-id="person.id" :persons="[person]" :events="events"/>
     </div>
   </div>
 </template> 
@@ -20,6 +20,14 @@ export default {
       return this.$store.state.person.persons.find(
         (t) => t.id == this.$route.params.id
       );
+    },
+    events() {
+      let events = [];
+      const person = this.person;
+      events = this.$store.state.event.events.filter(
+        (e) => e.teamId == person.teamId
+      );
+      return events;
     },
   },
   created() {
