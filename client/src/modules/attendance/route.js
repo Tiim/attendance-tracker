@@ -20,6 +20,11 @@ const children = [
     component: () => import('./views/PersonSinglePage'),
   },
   {
+    path: 'event/:id',
+    name: 'attendance-event',
+    component: () => import('./views/EventSinglePage'),
+  },
+  {
     path: 'manage',
     name: 'attendance-manage',
     component: () => import('./views/ManagePage'),

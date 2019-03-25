@@ -10,14 +10,16 @@
               </div>
             </th>
             <th class="headerBottom">
-              <a class="button" @click="prev()">&lt;</a>
+              <a v-if="!isSingle" class="button" @click="prev()">&lt;</a>
             </th>
             <th v-for="event in eventsPaginated" :key="event.id">
               <EventTitle :event="event"/>
             </th>
             <th class="headerBottom">
-              <a class="button" @click="addEvent()">+</a>
-              <a class="button" @click="next()">&gt;</a>
+              <div v-if="!isSingle">
+                <a class="button" @click="addEvent()">+</a>
+                <a class="button" @click="next()">&gt;</a>
+              </div>
             </th>
           </tr>
         </thead>
@@ -62,6 +64,9 @@ export default {
     };
   },
   computed: {
+    isSingle() {
+      return !this.personId && !this.teamId;
+    },
     eventsPaginated() {
       return this.events
         .slice()
@@ -102,7 +107,7 @@ export default {
       this.offset = Math.max(0, this.offset - this.collumns);
     },
     prev() {
-      if (this.eventsPaginated.length === 0) {
+      if (this.eventsPaginated.length === 0 || this.isSingle) {
         return;
       }
       const command = this.teamId ? 'loadForTeam' : 'loadForPerson';

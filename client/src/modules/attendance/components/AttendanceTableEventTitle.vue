@@ -1,6 +1,8 @@
 <template>
   <div class="rotate">
-    <div>{{text}}</div>
+    <div>
+      <router-link :to="{name: 'attendance-event', params: {id: event.id}}">{{text}}</router-link>
+    </div>
   </div>
 </template>
 
@@ -11,6 +13,7 @@ export default {
     event: {
       type: Object,
       default: () => ({
+        id: 1,
         date: new Date(),
       }),
     },
