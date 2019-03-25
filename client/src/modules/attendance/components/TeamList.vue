@@ -5,7 +5,7 @@
       <ul class="menu-list">
         <li v-for="team in teams" :key="team.id">
           <router-link
-            :to="{ name: 'team', params: { id: team.id }}"
+            :to="{ name: 'attendance-team', params: { id: team.id }}"
             class="has-text-weight-semibold"
           >{{team.name}}</router-link>
         </li>
@@ -19,7 +19,7 @@ export default {
   name: 'TeamList',
   computed: {
     teams() {
-      return this.$store.state.team.teams;
+      return this.$store.state.attendance.team.teams;
     },
   },
 };

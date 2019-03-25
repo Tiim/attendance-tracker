@@ -3,7 +3,7 @@
     <div class="container">
       <div class="navbar-brand">
         <a class="navbar-item has-text-weight-bold" href="/">Attendance Tracker</a>
-        
+
         <a role="button" class="navbar-burger burger" @click="tapBurger">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -12,10 +12,18 @@
       </div>
       <div :class="{'navbar-menu': true, 'is-active': mobileMenuOpen}">
         <div class="navbar-start">
-          <router-link to="/" class="navbar-item" @click.native="closeBurger">Home</router-link>
-          <router-link to="/team" class="navbar-item" @click.native="closeBurger">Teams</router-link>
-          <router-link to="/person" class="navbar-item" @click.native="closeBurger">People</router-link>
-          <router-link to="/manage" class="navbar-item" @click.native="closeBurger">Manage</router-link>
+          <router-link to="/attendance" class="navbar-item" @click.native="closeBurger">Home</router-link>
+          <router-link to="/attendance/team" class="navbar-item" @click.native="closeBurger">Teams</router-link>
+          <router-link
+            to="/attendance/person"
+            class="navbar-item"
+            @click.native="closeBurger"
+          >People</router-link>
+          <router-link
+            to="/attendance/manage"
+            class="navbar-item"
+            @click.native="closeBurger"
+          >Manage</router-link>
         </div>
       </div>
     </div>

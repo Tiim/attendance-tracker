@@ -15,7 +15,7 @@ export default {
     PersonList,
   },
   created() {
-    this.$store.dispatch('person/load');
+    this.$store.dispatch('attendance/person/load');
   },
 };
 </script>

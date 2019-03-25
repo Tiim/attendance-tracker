@@ -3,7 +3,7 @@
     <div class="menu">
       <ul class="menu-list">
         <li v-for="person in persons" :key="person.id">
-          <router-link :to="{name: 'person', params: {id: person.id}}">{{person.name}}</router-link>
+          <router-link :to="{name: 'attendance-person', params: {id: person.id}}">{{person.name}}</router-link>
         </li>
       </ul>
     </div>
@@ -15,7 +15,7 @@ export default {
   name: 'PersonList',
   computed: {
     persons() {
-      return this.$store.state.person.persons;
+      return this.$store.state.attendance.person.persons;
     },
   },
 };

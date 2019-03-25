@@ -3,9 +3,7 @@ import Vuex from 'vuex';
 import createLogger from 'vuex/dist/logger';
 import { debug } from '../config';
 
-import event from './modules/event';
-import person from './modules/person';
-import team from './modules/team';
+import attendance from '../modules/attendance/store';
 
 Vue.use(Vuex);
 
@@ -13,9 +11,7 @@ const store = new Vuex.Store({
   strict: debug,
 
   modules: {
-    event,
-    person,
-    team,
+    attendance,
   },
 
   plugins: [createLogger()],

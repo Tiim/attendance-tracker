@@ -1,6 +1,6 @@
 import Vue from 'vue';
-import { apiUrl } from '../../config';
-import { buildQuery } from '../../util/query';
+import { apiUrl } from '../../../config';
+import { buildQuery } from '../../../util/query';
 
 const state = {
   events: [],

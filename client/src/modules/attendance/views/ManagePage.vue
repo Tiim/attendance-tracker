@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import ManageTeamTree from '@/components/ManageTeamTree';
+import ManageTeamTree from '../components/ManageTeamTree';
 export default {
   name: 'ManagePage',
   components: {
@@ -20,8 +20,8 @@ export default {
     return {};
   },
   created() {
-    this.$store.dispatch('team/load');
-    this.$store.dispatch('person/load');
+    this.$store.dispatch('attendance/team/load');
+    this.$store.dispatch('attendance/person/load');
   },
 };
 </script>

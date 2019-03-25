@@ -41,7 +41,7 @@ export default {
   },
   computed: {
     teams() {
-      return this.$store.state.team.teams;
+      return this.$store.state.attendance.team.teams;
     },
   },
   methods: {

@@ -17,7 +17,7 @@ export default {
     return {};
   },
   created() {
-    this.$store.dispatch('team/load');
+    this.$store.dispatch('attendance/team/load');
   },
 };
 </script>

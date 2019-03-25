@@ -50,12 +50,15 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch('team/load', this.$route.params.id);
-    this.$store.dispatch('event/loadForTeam', {
+    this.$store.dispatch('attendance/team/load', this.$route.params.id);
+    this.$store.dispatch('attendance/event/loadForTeam', {
       id: this.$route.params.id,
       limit: this.collumns,
     });
-    this.$store.dispatch('person/loadForTeam', this.$route.params.id);
+    this.$store.dispatch(
+      'attendance/person/loadForTeam',
+      this.$route.params.id
+    );
   },
 };
 </script>

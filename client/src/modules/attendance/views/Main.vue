@@ -1,7 +1,6 @@
 <template>
-  <div class="content">
-    <h1 class="title">Anwesenheitsliste</h1>
-    <p class="subtitle">Welcome</p>
+  <div>
+    <router-view></router-view>
   </div>
 </template>
 

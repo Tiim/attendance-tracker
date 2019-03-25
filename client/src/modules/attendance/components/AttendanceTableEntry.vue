@@ -37,7 +37,7 @@ export default {
         excused: 'absent',
       };
       const newState = cycle[this.data.state];
-      this.$store.dispatch('event/newAttendanceState', {
+      this.$store.dispatch('attendance/event/newAttendanceState', {
         old: this.data,
         newState,
       });

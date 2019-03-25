@@ -58,12 +58,13 @@ export default {
       return this.activeTeam || this.activePerson;
     },
     teams() {
-      return this.$store.state.team.teams.map((t) => {
+      return this.$store.state.attendance.team.teams.map((t) => {
         return {
           ...t,
           persons:
-            this.$store.state.person.persons.filter((p) => p.teamId === t.id) ||
-            [],
+            this.$store.state.attendance.person.persons.filter(
+              (p) => p.teamId === t.id
+            ) || [],
         };
       });
     },
@@ -71,11 +72,11 @@ export default {
   methods: {
     saveTeam(team) {
       this.addTeamActive = false;
-      this.$store.dispatch('team/newTeam', team);
+      this.$store.dispatch('attendance/team/newTeam', team);
     },
     savePerson(person) {
       this.addPersonActive = false;
-      this.$store.dispatch('person/newPerson', person);
+      this.$store.dispatch('attendance/person/newPerson', person);
     },
     selectTeam(team) {
       this.activeTeam = team.id;
@@ -88,9 +89,9 @@ export default {
     deleteSelected() {
       const id = this.selected;
       if (this.activeTeam) {
-        this.$store.dispatch('team/delete', id);
+        this.$store.dispatch('attendance/team/delete', id);
       } else {
-        this.$store.dispatch('person/delete', id);
+        this.$store.dispatch('attendance/person/delete', id);
       }
     },
   },

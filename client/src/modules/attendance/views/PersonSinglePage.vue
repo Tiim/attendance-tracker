@@ -31,8 +31,10 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch('person/load');
-    this.$store.dispatch('event/loadForPerson', { id: this.$route.params.id });
+    this.$store.dispatch('attendance/person/load');
+    this.$store.dispatch('attendance/event/loadForPerson', {
+      id: this.$route.params.id,
+    });
   },
 };
 </script>

@@ -107,7 +107,7 @@ export default {
       }
       const command = this.teamId ? 'loadForTeam' : 'loadForPerson';
 
-      this.$store.dispatch(`event/${command}`, {
+      this.$store.dispatch(`attendance/event/${command}`, {
         id: this.teamId || this.personId,
         limit: this.collumns,
         before: this.events[0].date,

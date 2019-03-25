@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { apiUrl } from '../../config';
+import { apiUrl } from '../../../config';
 
 const state = {
   teams: [],
