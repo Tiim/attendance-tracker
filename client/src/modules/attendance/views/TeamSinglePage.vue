@@ -28,7 +28,7 @@ export default {
   },
   computed: {
     team() {
-      return this.$store.state.team.teams.find(
+      return this.$store.state.attendance.team.teams.find(
         (t) => t.id == this.$route.params.id
       );
     },
@@ -36,7 +36,9 @@ export default {
     events() {
       let events = [];
       events = events.concat(
-        this.$store.state.event.events.filter((e) => e.teamId == this.team.id)
+        this.$store.state.attendance.event.events.filter(
+          (e) => e.teamId == this.team.id
+        )
       );
       return events;
     },
@@ -44,7 +46,9 @@ export default {
     persons() {
       let persons = [];
       persons = persons.concat(
-        this.$store.state.person.persons.filter((p) => p.teamId == this.team.id)
+        this.$store.state.attendance.person.persons.filter(
+          (p) => p.teamId == this.team.id
+        )
       );
       return persons;
     },

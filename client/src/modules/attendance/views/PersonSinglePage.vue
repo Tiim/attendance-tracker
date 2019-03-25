@@ -17,14 +17,14 @@ export default {
   },
   computed: {
     person() {
-      return this.$store.state.person.persons.find(
+      return this.$store.state.attendance.person.persons.find(
         (t) => t.id == this.$route.params.id
       );
     },
     events() {
       let events = [];
       const person = this.person;
-      events = this.$store.state.event.events.filter(
+      events = this.$store.state.attendance.event.events.filter(
         (e) => e.teamId == person.teamId
       );
       return events;
