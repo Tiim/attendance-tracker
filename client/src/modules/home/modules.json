@@ -1,0 +1,17 @@
+[
+  {
+    "link": "/",
+    "name": "Home",
+    "icon": "/modules/home/home.svg"
+  },
+  {
+    "link": "/attendance",
+    "name": "Attendance",
+    "icon": "/modules/attendance/icon.svg"
+  },
+  {
+    "link": "/attendance",
+    "name": "Attendance",
+    "icon": "/modules/attendance/icon.svg"
+  }
+]

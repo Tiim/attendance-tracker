@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'Index',
+  name: 'AttendanceIndex',
   components: {},
   data() {
     return {};
