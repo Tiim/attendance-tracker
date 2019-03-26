@@ -17,7 +17,7 @@ fastify.use(cors());
 if (config.isProduction) {
   fastify.use(morgan('common'));
 } else if (config.isDev && !config.isTest) {
-  fastify.use(morgan('dev'));
+  fastify.use(morgan('common'));
 }
 
 addSchema(fastify);
