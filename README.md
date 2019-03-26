@@ -58,3 +58,9 @@ npm run dev
 As of 2019-01-14
 ![People List](https://i.imgur.com/CMQPV8v.png)
 ![Attendance](https://i.imgur.com/VJepLv3.png)
+
+## Credit
+
+- Icons made by [Gregor Cresnar](https://www.flaticon.com/authors/gregor-cresnar) [www.flaticon.com](https://www.flaticon.com/) is licensed by [CC 3.0 BY](http://creativecommons.org/licenses/by/3.0/)
+
+- Icons made by [Freepik](https://www.freepik.com/) [www.flaticon.com](https://www.flaticon.com/) is licensed by [CC 3.0 BY](http://creativecommons.org/licenses/by/3.0/)
