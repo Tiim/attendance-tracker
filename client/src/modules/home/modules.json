@@ -8,10 +8,5 @@
     "link": "/attendance",
     "name": "Attendance",
     "icon": "/modules/attendance/icon.svg"
-  },
-  {
-    "link": "/attendance",
-    "name": "Attendance",
-    "icon": "/modules/attendance/icon.svg"
   }
 ]

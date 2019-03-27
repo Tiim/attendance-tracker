@@ -1,26 +1,13 @@
 <template>
   <div>
-    <Header/>
-    <div class="section">
-      <div class="container">
-        <router-view/>
-      </div>
-    </div>
-    <div class="section">
-      <Footer/>
-    </div>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 export default {
   name: 'App',
-  components: {
-    Header,
-    Footer,
-  },
+  components: {},
 };
 </script>
 

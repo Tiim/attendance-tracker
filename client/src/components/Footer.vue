@@ -1,13 +1,15 @@
 <template>
-  <div class="container">
-    <footer class="footer">
-      <div class="content">
-        <p>
-          <strong>Attendance Tracker</strong>
-        </p>
-        <p>&copy;Tim Bachmann {{year}}</p>
-      </div>
-    </footer>
+  <div class="section">
+    <div class="container">
+      <footer class="footer">
+        <div class="content">
+          <p>
+            <strong>Attendance Tracker</strong>
+          </p>
+          <p>&copy;Tim Bachmann {{year}}</p>
+        </div>
+      </footer>
+    </div>
   </div>
 </template>
 
