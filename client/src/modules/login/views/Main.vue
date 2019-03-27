@@ -1,7 +1,7 @@
 https://dansup.github.io/bulma-templates/templates/login.html
 
 <template>
-  <div class="has-text-centered">
+  <div class="section container has-text-centered">
     <div class="column is-4 is-offset-4">
       <h3 class="title">Login</h3>
       <p class="subtitle">Please login to proceed.</p>
