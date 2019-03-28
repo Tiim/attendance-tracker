@@ -60,6 +60,16 @@ const schema = [
       },
     },
   },
+
+  {
+    $id: 'login',
+    type: 'object',
+    required: ['email', 'password'],
+    properties: {
+      email: { type: 'string', description: 'user email address' },
+      password: { type: 'string', description: 'user password' },
+    },
+  },
 ];
 
 const addSchema = (fastify) => {
