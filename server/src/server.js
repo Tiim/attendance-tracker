@@ -16,7 +16,12 @@ const config = require('./config');
 const { addSchema } = require('./schema');
 const api = require('./api');
 
-fastify.use(cors());
+fastify.use(
+  cors({
+    origin: 'http://localhost:8080',
+    credentials: true,
+  })
+);
 if (config.isProduction) {
   fastify.use(morgan('common'));
 } else if (config.isDev && !config.isTest) {
