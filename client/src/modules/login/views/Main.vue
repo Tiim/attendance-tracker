@@ -9,21 +9,27 @@ https://dansup.github.io/bulma-templates/templates/login.html
         <form>
           <div class="field">
             <div class="control">
-              <input class="input is-large" type="email" placeholder="Your Email" autofocus>
+              <input
+                v-model="email"
+                class="input is-large"
+                type="email"
+                placeholder="Your Email"
+                autofocus
+              >
             </div>
           </div>
           <div class="field">
             <div class="control">
-              <input class="input is-large" type="password" placeholder="Your Password" autofocus>
+              <input
+                v-model="password"
+                class="input is-large"
+                type="password"
+                placeholder="Your Password"
+                autofocus
+              >
             </div>
           </div>
-          <div class="field">
-            <label class="checkbox">
-              <input type="checkbox">
-              Remember me
-            </label>
-          </div>
-          <button class="button is-block is-info is-large is-fullwidth">Login</button>
+          <button class="button is-block is-info is-large is-fullwidth" @click.prevent="login">Login</button>
         </form>
       </div>
       <p class="has-text-grey">
@@ -40,9 +46,22 @@ export default {
   name: 'LoginIndex',
   components: {},
   data() {
-    return {};
+    return {
+      email: '',
+      password: '',
+    };
   },
   computed: {},
+  methods: {
+    async login() {
+      console.log(
+        await this.$store.dispatch('login/login', {
+          email: this.email,
+          password: this.password,
+        })
+      );
+    },
+  },
 };
 </script>
 <style scoped>

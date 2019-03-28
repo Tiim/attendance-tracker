@@ -1,6 +1,7 @@
 import Vue from 'vue';
-import { apiUrl } from '../../../config';
-import { buildQuery } from '../../../util/query';
+import { apiUrl } from '@/config';
+import { buildQuery } from '@/util/query';
+import fetch from '@/util/fetch';
 
 const state = {
   events: [],
@@ -18,21 +19,21 @@ const forTeamUrl = (id, limit, before) =>
 
 const actions = {
   async loadSingle(context, id) {
-    const event = await fetch(eventUrl(id)).then((res) => res.json());
+    const event = await fetch.get(eventUrl(id)).then((res) => res.json());
     context.commit('setEvents', [event]);
   },
 
   async loadForPerson(context, { id, limit, before }) {
-    const events = await fetch(forPersonUrl(id, limit, before)).then((res) =>
-      res.json()
-    );
+    const events = await fetch
+      .get(forPersonUrl(id, limit, before))
+      .then((res) => res.json());
     context.commit('setEvents', events);
   },
 
   async loadForTeam(context, { id, limit, before }) {
-    const events = await fetch(forTeamUrl(id, limit, before)).then((res) =>
-      res.json()
-    );
+    const events = await fetch
+      .get(forTeamUrl(id, limit, before))
+      .then((res) => res.json());
     context.commit('setEvents', events);
   },
 
@@ -40,25 +41,13 @@ const actions = {
     const { old, newState } = state;
     const body = { ...old, state: newState };
 
-    const result = await fetch(attendanceUrl, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body),
-    }).then((r) => r.json());
+    const result = await fetch.put(attendanceUrl, body).then((r) => r.json());
 
     context.commit('setAttendanceState', result);
   },
 
   async newEvent(context, event) {
-    const result = await fetch(eventsUrl, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(event),
-    }).then((r) => r.json());
+    const result = await fetch.put(eventsUrl, event).then((r) => r.json());
 
     context.commit('setEvents', [result]);
   },

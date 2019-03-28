@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import { apiUrl } from '../../../config';
+import fetch from '@/util/fetch';
 
 const state = {
   persons: [],
@@ -13,30 +14,24 @@ const forTeamUrl = (id) => `${apiUrl}/teams/${id}/persons`;
 
 const actions = {
   async load(context) {
-    const persons = await fetch(personsUrl).then((res) => res.json());
+    const persons = await fetch.get(personsUrl).then((res) => res.json());
     context.commit('setPersons', persons);
   },
 
   async loadForTeam(context, teamId) {
-    const events = await fetch(forTeamUrl(teamId)).then((res) => res.json());
+    const events = await fetch
+      .get(forTeamUrl(teamId))
+      .then((res) => res.json());
     context.commit('setPersons', events);
   },
 
   async newPerson(context, p) {
-    const person = await fetch(personsUrl, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(p),
-    }).then((res) => res.json());
+    const person = await fetch.put(personsUrl, p).then((res) => res.json());
     context.commit('setPersons', [person]);
   },
 
   async delete(context, id) {
-    await fetch(personUrl(id), {
-      method: 'DELETE',
-    });
+    await fetch.delete(personUrl(id));
     context.commit('delete', id);
   },
 };
