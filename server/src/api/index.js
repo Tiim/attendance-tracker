@@ -2,6 +2,7 @@ const authMiddleware = require('./middleware/auth');
 
 const subjects = [
   { prefix: '/auth', f: require('./auth'), auth: false },
+  { prefix: '/user', f: require('./user'), auth: true },
   { prefix: '/events', f: require('./event'), auth: true },
   { prefix: '/persons', f: require('./person'), auth: true },
   { prefix: '/teams', f: require('./team'), auth: true },
