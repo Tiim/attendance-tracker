@@ -16,12 +16,10 @@ module.exports = {
 
   async check(email, password) {
     const user = await this.getForUsername(email);
-    console.log(user);
     if (!user) {
       return false;
     }
     const cmp = await bcrypt.compare(password, user.hash);
-    console.log(cmp);
     if (cmp) {
       delete user.hash;
       return user;

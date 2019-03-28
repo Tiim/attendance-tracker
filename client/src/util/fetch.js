@@ -15,7 +15,7 @@ const post = async (url, body) => {
 
 const put = async (url, body) => {
   return fetch(url, {
-    method: 'POST',
+    method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -26,10 +26,7 @@ const put = async (url, body) => {
 
 const del = async (url) => {
   return fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    method: 'DELETE',
     credentials: 'include',
   });
 };
