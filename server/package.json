@@ -7,7 +7,7 @@
     "node": ">=11.0.0"
   },
   "scripts": {
-    "dev": "nodemon src/index.js",
+    "dev": "nodemon --inspect=0.0.0.0:9229 src/index.js",
     "start": "node src/index.js",
     "test": "NODE_ENV=test mocha",
     "lint": "eslint ."
