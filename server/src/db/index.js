@@ -51,6 +51,21 @@ const createTables = async () => {
     table.enu('state', ['absent', 'present', 'excused']);
     table.unique(['eventId', 'personId']);
   });
+
+  //USER
+  await createTableIfNotExists('user', (table) => {
+    table.increments('id').primary();
+    table.string('email');
+    table.string('hash');
+    table.unique('email');
+  });
+
+  await createTableIfNotExists('session', (table) => {
+    table.increments('id').primary();
+    table.integer('userId');
+    table.string('session');
+    table.dateTime('issued');
+  });
 };
 
 const maxLimit = config.maxLimit;

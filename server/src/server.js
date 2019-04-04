@@ -1,6 +1,9 @@
 const Fastify = require('fastify');
 const cors = require('cors');
 const morgan = require('morgan');
+const cookie = require('fastify-cookie');
+const session = require('fastify-session');
+
 const fastify = Fastify({
   ignoreTrailingSlash: true,
   logger: {
@@ -13,7 +16,12 @@ const config = require('./config');
 const { addSchema } = require('./schema');
 const api = require('./api');
 
-fastify.use(cors());
+fastify.use(
+  cors({
+    origin: 'http://localhost:8080',
+    credentials: true,
+  })
+);
 if (config.isProduction) {
   fastify.use(morgan('common'));
 } else if (config.isDev && !config.isTest) {
@@ -21,6 +29,17 @@ if (config.isProduction) {
 }
 
 addSchema(fastify);
+
+fastify.register(cookie);
+//TODO change secret
+fastify.register(session, {
+  cookie: {
+    httpOnly: true,
+    secure: config.isProduction,
+  },
+  saveUninitialized: false,
+  secret: 'a secret with minimum length of 32 characters',
+});
 
 fastify.register(api, { prefix: '/api' });
 fastify.get('/', (req, reply) => {

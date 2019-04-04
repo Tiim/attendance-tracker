@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar" role="navigation" aria-label="main navigation">
+  <nav class="navbar has-shadow is-spaced" role="navigation" aria-label="main navigation">
     <div class="container">
       <div class="navbar-brand">
         <a class="navbar-item has-text-weight-bold" href="/">Attendance Tracker</a>
@@ -12,18 +12,13 @@
       </div>
       <div :class="{'navbar-menu': true, 'is-active': mobileMenuOpen}">
         <div class="navbar-start">
-          <router-link to="/attendance" class="navbar-item" @click.native="closeBurger">Home</router-link>
-          <router-link to="/attendance/team" class="navbar-item" @click.native="closeBurger">Teams</router-link>
           <router-link
-            to="/attendance/person"
+            v-for="link in links"
+            :key="link.to"
+            :to="link.to"
             class="navbar-item"
             @click.native="closeBurger"
-          >People</router-link>
-          <router-link
-            to="/attendance/manage"
-            class="navbar-item"
-            @click.native="closeBurger"
-          >Manage</router-link>
+          >{{link.name}}</router-link>
         </div>
       </div>
     </div>
@@ -33,6 +28,9 @@
 <script>
 export default {
   name: 'Header',
+  props: {
+    links: { type: Array, default: () => [{ name: 'Home', to: '/' }] },
+  },
   data() {
     return {
       mobileMenuOpen: false,

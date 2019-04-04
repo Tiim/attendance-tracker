@@ -1,0 +1,25 @@
+@hostname = localhost
+@port = 8081
+@url = http://{{hostname}}:{{port}}/api
+@contentType = application/json
+@date = {{$datetime iso8601}}
+###
+POST {{url}}/auth/login HTTP/1.1
+content-type: {{contentType}}
+
+{
+    "email": "test@example.com",
+    "password": "correct horse battery staple"
+}
+###
+GET {{url}}/auth/me/ HTTP/1.1
+cookie: sessionId=_pAGG6-Fm63gok0ULPdfUexASnSpYlya.fkCP70c9rQHGQDXNm%2Fr3s7GUK%2FXVuncpjr14r49fCJY;
+
+### 
+POST  {{url}}/auth/register/ HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+  "email": "test2@example.com",
+  "password": "correct horse battery staple"
+} 

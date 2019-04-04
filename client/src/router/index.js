@@ -2,10 +2,11 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import attendance from '../modules/attendance/route';
 import home from '../modules/home/route';
+import login from '../modules/login/route';
 
 Vue.use(Router);
 
-const modules = [home, attendance];
+const modules = [home, attendance, login];
 
 export default new Router({
   mode: 'history',
