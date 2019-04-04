@@ -52,6 +52,10 @@ export default {
     };
   },
   computed: {},
+  created() {
+    this.checkLogin();
+    this.$store.watch((state) => state.login.loggedIn, this.checkLogin);
+  },
   methods: {
     async login() {
       console.log(
@@ -60,6 +64,11 @@ export default {
           password: this.password,
         })
       );
+    },
+    checkLogin() {
+      if (this.$store.state.login.loggedIn) {
+        this.$router.push('/');
+      }
     },
   },
 };

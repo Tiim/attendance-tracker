@@ -17,8 +17,5 @@ new Vue({
   template: '<App/>',
 });
 
-store.dispatch('login/checkLoginState').then((loggedIn) => {
-  if (!loggedIn) {
-    router.push('login');
-  }
-});
+store.dispatch('login/checkLoginState');
+router.push('login');

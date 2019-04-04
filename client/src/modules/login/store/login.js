@@ -2,7 +2,7 @@ import { apiUrl } from '../../../config';
 import fetch from '@/util/fetch';
 
 const state = {
-  loggedIn: true,
+  loggedIn: false,
   user: {},
 };
 
@@ -18,7 +18,7 @@ const actions = {
       context.commit('setState', { loggedIn: false, user: {} });
       return false;
     } else {
-      const user = res.json();
+      const { user } = await res.json();
       context.commit('setState', { loggedIn: true, user });
       return true;
     }
