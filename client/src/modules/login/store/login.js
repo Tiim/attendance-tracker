@@ -3,6 +3,7 @@ import fetch from '@/util/fetch';
 
 const state = {
   loggedIn: false,
+  route: '',
   user: {},
 };
 
@@ -12,14 +13,14 @@ const loginCheckUrl = `${apiUrl}/user/me`;
 const loginUrl = `${apiUrl}/auth/login`;
 
 const actions = {
-  async checkLoginState(context) {
+  async checkLoginState(context, route) {
     const res = await fetch.get(loginCheckUrl);
     if (res.status === 403) {
-      context.commit('setState', { loggedIn: false, user: {} });
+      context.commit('setState', { loggedIn: false, route, user: {} });
       return false;
     } else {
       const { user } = await res.json();
-      context.commit('setState', { loggedIn: true, user });
+      context.commit('setState', { loggedIn: true, route, user });
       return true;
     }
   },
@@ -41,6 +42,9 @@ const mutations = {
   setState(state, change) {
     state.loggedIn = change.loggedIn;
     state.user = change.user;
+    if (change.route) {
+      state.route = change.route;
+    }
   },
 };
 

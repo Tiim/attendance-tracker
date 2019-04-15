@@ -67,7 +67,7 @@ export default {
     },
     checkLogin() {
       if (this.$store.state.login.loggedIn) {
-        this.$router.push('/');
+        this.$router.replace(this.$store.state.login.route);
       }
     },
   },

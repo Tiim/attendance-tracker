@@ -17,5 +17,8 @@ new Vue({
   template: '<App/>',
 });
 
-store.dispatch('login/checkLoginState');
-router.push('login');
+store.dispatch(
+  'login/checkLoginState',
+  window.location.pathname + window.location.search
+);
+router.replace('login');
