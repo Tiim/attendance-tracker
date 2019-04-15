@@ -1,6 +1,6 @@
 module.exports = (request, reply, done) => {
   if (!request.session.user) {
-    reply.status(403).send('Not authenticated!');
+    reply.unauthorized();
   }
   done();
 };

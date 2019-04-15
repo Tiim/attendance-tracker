@@ -3,6 +3,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const cookie = require('fastify-cookie');
 const session = require('fastify-session');
+const fastifySensible = require('fastify-sensible');
 
 const fastify = Fastify({
   ignoreTrailingSlash: true,
@@ -12,6 +13,7 @@ const fastify = Fastify({
   },
 });
 
+fastify.register(fastifySensible);
 const config = require('./config');
 const { addSchema } = require('./schema');
 const api = require('./api');

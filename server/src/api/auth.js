@@ -39,5 +39,9 @@ module.exports = function(fastify, opts, next) {
     reply.send({ user: req.session.user });
   });
 
+  fastify.get('/', async (req, reply) => {
+    reply.send({ apis: ['/me', '/login', '/register'] });
+  });
+
   next();
 };
