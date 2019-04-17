@@ -62,6 +62,18 @@ const createTables = async () => {
 
   //SESSION
   // created by session store
+
+  await createTableIfNotExists('best-time', (table) => {
+    table.increments('id').primary();
+    table.integer('personId');
+    table.date('date');
+    table.integer('distance');
+    table.string('style');
+    table.enu('unit', ['meter', 'yard']);
+    table.integer('time'); //in ms
+    table.string('notes');
+    table.jsonb('splits'); // [{from: <distance>, to:<distance>, time: <time_in_ms>}]
+  });
 };
 
 const maxLimit = config.maxLimit;
