@@ -60,6 +60,7 @@ const createTables = async () => {
     table.unique('email');
   });
 
+  //SESSION
   await createTableIfNotExists('session', (table) => {
     table.increments('id').primary();
     table.integer('userId');

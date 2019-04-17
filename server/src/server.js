@@ -40,7 +40,7 @@ fastify.register(session, {
     secure: config.isProduction,
   },
   saveUninitialized: false,
-  secret: 'a secret with minimum length of 32 characters',
+  secret: config.sessionSecret,
 });
 
 fastify.register(api, { prefix: '/api' });
