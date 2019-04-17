@@ -3,7 +3,10 @@ const cors = require('cors');
 const morgan = require('morgan');
 const cookie = require('fastify-cookie');
 const session = require('fastify-session');
+const KnexSessionStore = require('connect-session-knex')(session);
 const fastifySensible = require('fastify-sensible');
+
+const { knex } = require('./db');
 
 const fastify = Fastify({
   ignoreTrailingSlash: true,
@@ -32,15 +35,23 @@ if (config.isProduction) {
 
 addSchema(fastify);
 
+const store = new KnexSessionStore({
+  knex,
+  tablename: 'session',
+  createtable: true,
+  clearInterval: 1000 * 60 * 30, //30 Min
+});
+
 fastify.register(cookie);
-//TODO change secret
 fastify.register(session, {
   cookie: {
     httpOnly: true,
     secure: config.isProduction,
+    maxAge: 1000 * 60 * 60 * 24 * 365, //1y
   },
   saveUninitialized: false,
   secret: config.sessionSecret,
+  store,
 });
 
 fastify.register(api, { prefix: '/api' });

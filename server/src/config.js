@@ -19,7 +19,7 @@ const sessionSecret =
   process.env.SESSION_SECRET ||
   'a default secret with minimum length of 32 characters';
 
-if (!envBool.isProduction && sessionSecret.includes('default')) {
+if (envBool.isProduction && sessionSecret.includes('default')) {
   console.log(
     'WARNING: default session secret in production. Set SESSION_SECRET to an appropriate string'
   );

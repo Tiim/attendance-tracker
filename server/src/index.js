@@ -3,6 +3,6 @@ require('./config');
 
 const { createTables } = require('./db');
 
-require('./server');
-
 createTables();
+
+require('./server');

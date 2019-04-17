@@ -61,12 +61,7 @@ const createTables = async () => {
   });
 
   //SESSION
-  await createTableIfNotExists('session', (table) => {
-    table.increments('id').primary();
-    table.integer('userId');
-    table.string('session');
-    table.dateTime('issued');
-  });
+  // created by session store
 };
 
 const maxLimit = config.maxLimit;
