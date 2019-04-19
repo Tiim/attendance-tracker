@@ -2,7 +2,7 @@
   {
     "link": "/",
     "name": "Home",
-    "icon": "/modules/home/home.svg"
+    "icon": "/modules/home/icon.svg"
   },
   {
     "link": "/attendance",
@@ -10,8 +10,8 @@
     "icon": "/modules/attendance/icon.svg"
   },
   {
-    "link": "best-times",
-    "name": "Best Times",
-    "icon": "/modules/attendance/icon.svg"
+    "link": "/race-results",
+    "name": "Race Results",
+    "icon": "/modules/race-results/icon.svg"
   }
 ]

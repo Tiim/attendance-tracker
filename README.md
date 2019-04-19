@@ -61,6 +61,6 @@ As of 2019-01-14
 
 ## Credit
 
-- Icons made by [Gregor Cresnar](https://www.flaticon.com/authors/gregor-cresnar) [www.flaticon.com](https://www.flaticon.com/) is licensed by [CC 3.0 BY](http://creativecommons.org/licenses/by/3.0/)
+- Icons made by [Gregor Cresnar](https://www.flaticon.com/authors/gregor-cresnar) from [www.flaticon.com](https://www.flaticon.com/) is licensed by [CC 3.0 BY](http://creativecommons.org/licenses/by/3.0/)
 
 - Icons made by [Freepik](https://www.freepik.com/) [www.flaticon.com](https://www.flaticon.com/) is licensed by [CC 3.0 BY](http://creativecommons.org/licenses/by/3.0/)

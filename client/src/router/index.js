@@ -3,11 +3,11 @@ import Router from 'vue-router';
 import attendance from '../modules/attendance/route';
 import home from '../modules/home/route';
 import login from '../modules/login/route';
-import bestTimes from '../modules/best-times/route';
+import raceResults from '../modules/race-results/route';
 
 Vue.use(Router);
 
-const modules = [home, attendance, login, bestTimes];
+const modules = [home, attendance, login, raceResults];
 
 export default new Router({
   mode: 'history',

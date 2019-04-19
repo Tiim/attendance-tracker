@@ -1,14 +1,14 @@
 const children = [
   {
-    path: 'best-times/add',
-    name: 'best-tiems-add',
+    path: 'race-results/add',
+    name: 'race-results-add',
     component: () => import('./views/Add'),
   },
 ];
 
 const root = {
-  path: '/best-times',
-  name: 'best-times',
+  path: '/race-results',
+  name: 'race-results',
   component: () => import('./views/Main'),
   children,
 };

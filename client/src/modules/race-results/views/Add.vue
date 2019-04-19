@@ -49,7 +49,7 @@
 
 <script>
 export default {
-  name: 'HomeIndex',
+  name: 'RaceResultsAdd',
   components: {},
   data() {
     return {
