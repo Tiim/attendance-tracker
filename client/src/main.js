@@ -17,8 +17,9 @@ new Vue({
   template: '<App/>',
 });
 
-store.dispatch(
-  'login/checkLoginState',
-  window.location.pathname + window.location.search
-);
+let currentPath = window.location.pathname + window.location.search;
+if (currentPath.includes('/login')) {
+  currentPath = '/';
+}
+store.dispatch('login/checkLoginState', currentPath);
 router.replace('login');

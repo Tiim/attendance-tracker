@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header/>
+    <Header :links="header"/>
     <div class="section">
       <div class="container">
         <router-view></router-view>
@@ -20,6 +20,10 @@ export default {
   data() {
     return {
       person: '',
+      header: [
+        { name: 'Home', to: '/' },
+        { name: 'Add', to: '/race-results/add' },
+      ],
     };
   },
 };

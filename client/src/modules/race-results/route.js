@@ -1,6 +1,6 @@
 const children = [
   {
-    path: 'race-results/add',
+    path: '/race-results/add',
     name: 'race-results-add',
     component: () => import('./views/Add'),
   },
