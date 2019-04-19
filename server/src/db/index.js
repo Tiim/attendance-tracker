@@ -63,16 +63,31 @@ const createTables = async () => {
   //SESSION
   // created by session store
 
-  await createTableIfNotExists('best-time', (table) => {
+  await createTableIfNotExists('race-result', (table) => {
     table.increments('id').primary();
     table.integer('personId');
     table.date('date');
     table.integer('distance');
     table.string('style');
-    table.enu('unit', ['meter', 'yard']);
+    table.enu('pool', [
+      'LCM',
+      'SCM',
+      'SCY',
+      'SCM16',
+      'SCM20',
+      'SCM33',
+      'SCY20',
+      'SCY27',
+      'SCY33',
+      'SCY36',
+      'OPENM',
+      'OPENY',
+    ]);
     table.integer('time'); //in ms
     table.string('notes');
     table.jsonb('splits'); // [{from: <distance>, to:<distance>, time: <time_in_ms>}]
+    table.boolean('official');
+    table.jsonb('meet'); // {name, place}
   });
 };
 

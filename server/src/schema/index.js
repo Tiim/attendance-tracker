@@ -15,6 +15,60 @@ const schema = [
     },
   },
   {
+    $id: 'race-result',
+    type: 'object',
+    required: [
+      'id',
+      'personId',
+      'date',
+      'distance',
+      'style',
+      'pool',
+      'time',
+      'notes',
+      'splits',
+      'official',
+      'meet',
+    ],
+    properties: {
+      id: { type: 'integer', description: 'time result id' },
+      personId: { type: 'integer', description: 'The id of the person' },
+      date: {
+        type: 'string',
+        format: 'date',
+        description: 'date when the result was achieved',
+      },
+      distance: { type: 'integer', description: 'distance in pool unit' },
+      style: { type: 'string', description: 'swim style' },
+      pool: {
+        type: 'string',
+        enum: [
+          'LCM',
+          'SCM',
+          'SCY',
+          'SCM16',
+          'SCM20',
+          'SCM33',
+          'SCY20',
+          'SCY27',
+          'SCY33',
+          'SCY36',
+          'OPENM',
+          'OPENY',
+        ],
+        description: 'pool length',
+      },
+      time: { type: 'integer', description: 'time in ms' },
+      notes: { type: 'string', description: 'notes to the result' },
+      splits: { type: 'array', description: 'time splits' }, //TODO: validate better [{from: <distance>, to:<distance>, time: <time_in_ms>}]
+      official: {
+        type: 'boolean',
+        description: 'is this a officially recorded time',
+      },
+      meet: { type: 'object', description: 'meet meta data' }, // TODO: validate better
+    },
+  },
+  {
     $id: 'event',
     type: 'object',
     required: ['date', 'teamId'],
@@ -31,6 +85,15 @@ const schema = [
         items: 'attendance#',
         description: 'All attendance data of this event',
       },
+    },
+  },
+  {
+    $id: 'login',
+    type: 'object',
+    required: ['email', 'password'],
+    properties: {
+      email: { type: 'string', description: 'user email address' },
+      password: { type: 'string', description: 'user password' },
     },
   },
   {
@@ -58,16 +121,6 @@ const schema = [
         type: 'boolean',
         description: 'The status if this team is still active',
       },
-    },
-  },
-
-  {
-    $id: 'login',
-    type: 'object',
-    required: ['email', 'password'],
-    properties: {
-      email: { type: 'string', description: 'user email address' },
-      password: { type: 'string', description: 'user password' },
     },
   },
 ];
