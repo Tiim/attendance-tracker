@@ -60,7 +60,19 @@ const schema = [
       },
       time: { type: 'integer', description: 'time in ms' },
       notes: { type: 'string', description: 'notes to the result' },
-      splits: { type: 'array', description: 'time splits' }, //TODO: validate better [{from: <distance>, to:<distance>, time: <time_in_ms>}]
+      splits: {
+        type: 'array',
+        items: {
+          type: 'object',
+          required: ['from', 'to', 'time'],
+          properties: {
+            from: { type: 'integer' },
+            to: { type: 'integer' },
+            time: { type: 'integer' },
+          },
+        },
+        description: 'time splits',
+      },
       official: {
         type: 'boolean',
         description: 'is this a officially recorded time',
