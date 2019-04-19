@@ -16,5 +16,17 @@ module.exports = function(fastify, opts, next) {
     }
   );
 
+  fastify.get(
+    '/:personId',
+    {
+      schema: { response: { '2xx': { type: 'array', items: 'race-result#' } } },
+    },
+    async (req, reply) => {
+      const { personId } = req.params;
+      const results = storage.raceResult.getForPerson(personId);
+      reply.send(results);
+    }
+  );
+
   next();
 };

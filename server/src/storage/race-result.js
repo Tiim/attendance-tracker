@@ -21,6 +21,14 @@ module.exports = {
     return ret;
   },
 
+  async getForPerson(id) {
+    const ret = await knex
+      .from('race-result')
+      .select()
+      .where({ personId: id });
+    return ret;
+  },
+
   async upsert(result) {
     let { id } = result;
     if (await this.exists(id)) {

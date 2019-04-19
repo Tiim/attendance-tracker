@@ -63,6 +63,7 @@ const createTables = async () => {
   //SESSION
   // created by session store
 
+  //RACE-RESULT
   await createTableIfNotExists('race-result', (table) => {
     table.increments('id').primary();
     table.integer('personId');
@@ -84,10 +85,10 @@ const createTables = async () => {
       'OPENY',
     ]);
     table.integer('time'); //in ms
-    table.string('notes');
     table.jsonb('splits'); // [{from: <distance>, to:<distance>, time: <time_in_ms>}]
     table.boolean('official');
     table.jsonb('meet'); // {name, place}
+    table.string('notes');
   });
 };
 
