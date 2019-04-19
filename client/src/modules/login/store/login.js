@@ -15,7 +15,7 @@ const loginUrl = `${apiUrl}/auth/login`;
 const actions = {
   async checkLoginState(context, route) {
     const res = await fetch.get(loginCheckUrl);
-    if (res.status === 403) {
+    if (res.status === 401) {
       context.commit('setState', { loggedIn: false, route, user: {} });
       return false;
     } else {
