@@ -1,5 +1,7 @@
 # Attendance Tracker
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Tiim/attendance-tracker.svg)](https://greenkeeper.io/)
+
 A web app that allows you to manage and log attendances of teammembers.
 _This app is still a WIP_
 
