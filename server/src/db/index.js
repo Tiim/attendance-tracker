@@ -1,6 +1,7 @@
 const rootConfig = require('../config');
 const config = require('./config');
 const knex = require('knex')(config);
+const poolEnum = require('../../../shared/data/pool').map((p) => p.name);
 
 const createTableIfNotExists = async (name, callback) => {
   const exists = await knex.schema.hasTable(name);
@@ -70,20 +71,7 @@ const createTables = async () => {
     table.date('date');
     table.integer('distance');
     table.string('style');
-    table.enu('pool', [
-      'LCM',
-      'SCM',
-      'SCY',
-      'SCM16',
-      'SCM20',
-      'SCM33',
-      'SCY20',
-      'SCY27',
-      'SCY33',
-      'SCY36',
-      'OPENM',
-      'OPENY',
-    ]);
+    table.enu('pool', poolEnum);
     table.integer('time'); //in ms
     table.jsonb('splits'); // [{from: <distance>, to:<distance>, time: <time_in_ms>}]
     table.boolean('official');

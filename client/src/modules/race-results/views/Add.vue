@@ -4,6 +4,7 @@
       <div class="columns">
         <div class="column is-three-quarters">
           <!-- personId -->
+          <!-- TODO: add person search box -->
           <div class="field">
             <label class="label">Person</label>
             <div class="control">
@@ -29,22 +30,12 @@
             </div>
           </div>
           <!-- pool -->
-          <div class="field">
-            <label class="label">Pool</label>
-            <div class="control">
-              <div class="select">
-                <select v-model="pool">
-                  <option>LCM</option>
-                  <option>SCM</option>
-                  <!--TODO: add more pool lengths -->
-                </select>
-              </div>
-            </div>
-          </div>
+          <label class="label">Pool</label>
+          <CourseForm v-model="pool"/>
           <!-- time -->
           <label class="label">Time</label>
           <TimeForm v-model="time"/>
-          <!-- TODO: splits -->
+          <!-- splits -->
           <label class="label">Splits</label>
           <SplitsForm v-model="splits"/>
           <!-- official -->
@@ -64,7 +55,7 @@
           </div>
           <div class="field">
             <div class="control">
-              <button class="button is-link">Submit</button>
+              <button class="button is-link" @click="submit">Submit</button>
             </div>
           </div>
         </div>
@@ -75,12 +66,13 @@
 
 <script>
 import { zeroPad } from '@/util/formatNumber';
+import CourseForm from '../components/CourseForm';
 import TimeForm from '../components/TimeForm';
 import SplitsForm from '../components/SplitsForm';
 
 export default {
   name: 'RaceResultsAdd',
-  components: { TimeForm, SplitsForm },
+  components: { CourseForm, TimeForm, SplitsForm },
   data() {
     return {
       person: 1,
@@ -106,6 +98,21 @@ export default {
       set(date) {
         this.date = new Date(date);
       },
+    },
+  },
+  methods: {
+    submit() {
+      console.log({
+        person: this.person,
+        date: this.date,
+        distance: this.distance,
+        style: this.style,
+        pool: this.pool,
+        time: this.time,
+        splits: this.splits,
+        official: this.official,
+        notes: this.notes,
+      });
     },
   },
 };

@@ -1,0 +1,14 @@
+[
+  { "name": "LCM", "unit": "m", "length": 50 },
+  { "name": "SCM", "unit": "m", "length": 25 },
+  { "name": "SCY", "unit": "y", "length": 25 },
+  { "name": "SCM16", "unit": "m", "length": 16 },
+  { "name": "SCM20", "unit": "m", "length": 20 },
+  { "name": "SCM33", "unit": "m", "length": 33.333 },
+  { "name": "SCY20", "unit": "y", "length": 20 },
+  { "name": "SCY27", "unit": "y", "length": 27 },
+  { "name": "SCY33", "unit": "y", "length": 33.333 },
+  { "name": "SCY36", "unit": "y", "length": 36 },
+  { "name": "OPENM", "unit": "m", "length": null },
+  { "name": "OPENY", "unit": "y", "length": null }
+]
