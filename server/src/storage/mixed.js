@@ -12,9 +12,8 @@ module.exports = {
   },
 
   async eventForTeam(teamId, options) {
-    let {
-      pagination: { limit = maxLimit, before = new Date() },
-    } = options;
+    const { pagination } = options || {};
+    let { limit = maxLimit, before = new Date() } = pagination || {};
     before = new Date(before);
 
     return await knex
