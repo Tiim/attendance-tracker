@@ -1,5 +1,6 @@
 # Attendance Tracker
 
+[![Build Status](https://travis-ci.com/Tiim/attendance-tracker.svg?branch=master)](https://travis-ci.com/Tiim/attendance-tracker)
 [![Greenkeeper badge](https://badges.greenkeeper.io/Tiim/attendance-tracker.svg)](https://greenkeeper.io/)
 
 A web app that allows you to manage and log attendances of teammembers.
