@@ -5,13 +5,22 @@ module.exports = function(fastify, opts, next) {
     '/',
     {
       schema: {
+        querystring: {
+          search: { type: 'string' },
+        },
         response: {
           '2xx': { type: 'array', items: 'person#' },
         },
       },
     },
     async (req, reply) => {
-      const result = await storage.person.getAll();
+      const { search } = req.query || {};
+      let result;
+      if (search) {
+        result = await storage.person.search(search);
+      } else {
+        result = await storage.person.getAll();
+      }
       reply.send(result);
     }
   );

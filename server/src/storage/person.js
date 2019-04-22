@@ -35,6 +35,15 @@ module.exports = {
       .orderBy('name');
   },
 
+  async search(name) {
+    name = name.toLowerCase();
+    return await knex
+      .from('person')
+      .select()
+      .whereRaw(`LOWER(name) LIKE ?`, [`%${name}%`])
+      .orderBy('name');
+  },
+
   async upsert({ id, name, teamId, active = true }) {
     if (await this.exists(id)) {
       await knex('event')
