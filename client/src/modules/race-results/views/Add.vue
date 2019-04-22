@@ -4,12 +4,8 @@
       <div class="columns">
         <div class="column is-three-quarters">
           <!-- personId -->
-          <div class="field">
-            <label class="label">Person</label>
-            <div class="control">
-              <input v-model="person" class="input" type="number" placeholder="1">
-            </div>
-          </div>
+          <label class="label">Person</label>
+          <PersonForm v-model="person"/>
           <!-- date -->
           <div class="field">
             <label class="label">Date</label>
@@ -75,15 +71,16 @@
 
 <script>
 import { zeroPad } from '@/util/formatNumber';
+import PersonForm from '../components/PersonForm';
 import TimeForm from '../components/TimeForm';
 import SplitsForm from '../components/SplitsForm';
 
 export default {
   name: 'RaceResultsAdd',
-  components: { TimeForm, SplitsForm },
+  components: { PersonForm, TimeForm, SplitsForm },
   data() {
     return {
-      person: 1,
+      person: null,
       date: new Date(),
       distance: 100,
       style: 'free',
