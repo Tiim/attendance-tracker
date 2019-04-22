@@ -7,12 +7,8 @@
           <label class="label">Person</label>
           <PersonForm v-model="person"/>
           <!-- date -->
-          <div class="field">
-            <label class="label">Date</label>
-            <div class="control">
-              <input v-model="dateModel" class="input" type="date">
-            </div>
-          </div>
+          <label class="label">Date</label>
+          <DatePicker v-model="date"/>
           <label class="label">Category</label>
           <div class="field is-grouped">
             <!-- distande -->
@@ -37,7 +33,10 @@
           <div class="field">
             <label class="label">Official</label>
             <div class="control">
-              <input v-model="official" class="checkbox" type="checkbox">
+              <label class="checkbox">
+                <input v-model="official" class="checkbox" type="checkbox">
+                Official result from a competition
+              </label>
             </div>
           </div>
           <!-- TODO: meet -->
@@ -53,6 +52,9 @@
               <button class="button is-link" @click="submit">Submit</button>
             </div>
           </div>
+          <div v-if="warning.length" class="notification is-warning">
+            <div v-for="w in warning" :key="w">{{w}}</div>
+          </div>
         </div>
       </div>
     </div>
@@ -60,55 +62,44 @@
 </template>
 
 <script>
-import { zeroPad } from '@/util/formatNumber';
-import PersonForm from '../components/PersonForm';
+import { check } from '@/util/checkForm';
+
 import CourseForm from '../components/CourseForm';
+import DatePicker from '../components/DatePicker';
+import PersonForm from '../components/PersonForm';
 import TimeForm from '../components/TimeForm';
 import SplitsForm from '../components/SplitsForm';
 
 export default {
   name: 'RaceResultsAdd',
-  components: { CourseForm, PersonForm, TimeForm, SplitsForm },
+  components: { CourseForm, DatePicker, PersonForm, TimeForm, SplitsForm },
   data() {
     return {
       person: null,
-      date: new Date(),
+      date: null,
       distance: 100,
       style: 'free',
       pool: 'SCM',
-      time: 10000,
+      time: 0,
       splits: [],
       official: true,
       notes: '',
+      warning: [],
     };
   },
-  computed: {
-    dateModel: {
-      get() {
-        const month = this.date.getUTCMonth() + 1; //months from 1-12
-        const day = this.date.getUTCDate();
-        const year = this.date.getUTCFullYear();
-
-        return year + '-' + zeroPad(month) + '-' + zeroPad(day);
-      },
-      set(date) {
-        this.date = new Date(date);
-      },
-    },
-  },
+  computed: {},
   methods: {
     submit() {
-      console.log({
-        person: this.person,
-        date: this.date,
-        distance: this.distance,
-        style: this.style,
-        pool: this.pool,
-        time: this.time,
-        splits: this.splits,
-        official: this.official,
-        notes: this.notes,
-      });
+      this.warning = [];
+      check(this.person, this.warning, 'Person not set');
+      check(this.date, this.warning, 'Date not set');
+      check(this.distance, this.warning, 'Distance not set');
+      check(this.style, this.warning, 'Style not set');
+      check(this.pool, this.warning, 'Pool not set');
+      check(this.time, this.warning, 'Time not set');
+      if (this.warning.length) {
+        return;
+      }
     },
   },
 };

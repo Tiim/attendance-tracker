@@ -13,11 +13,11 @@
       <input v-model="end" class="input" type="text" placeholder="end" @input="update()">
     </div>
     <p class="control">
-      <a class="button is-static">m time:</a>
+      <a class="button is-static">Time:</a>
     </p>
     <TimeForm v-model="time" @input="update()"/>
     <p class="control">
-      <a class="button is-warning" @click="del()">X</a>
+      <a class="button" @click="del()">X</a>
     </p>
   </div>
 </template>
