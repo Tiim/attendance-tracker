@@ -1,5 +1,11 @@
-const get = async (url) => {
-  return fetch(url, { credentials: 'include' });
+const get = async (url, params) => {
+  const urlObj = new URL(url);
+  if (params) {
+    Object.keys(params).forEach((key) =>
+      urlObj.searchParams.append(key, params[key])
+    );
+  }
+  return fetch(urlObj, { credentials: 'include' });
 };
 
 const post = async (url, body) => {
