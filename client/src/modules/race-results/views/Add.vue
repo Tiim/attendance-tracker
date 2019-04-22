@@ -4,16 +4,8 @@
       <div class="columns">
         <div class="column is-three-quarters">
           <!-- personId -->
-          <<<<<<< HEAD
           <label class="label">Person</label>
-          <PersonForm v-model="person"/>=======
-          <!-- TODO: add person search box -->
-          <div class="field">
-            <label class="label">Person</label>
-            <div class="control">
-              <input v-model="person" class="input" type="number" placeholder="1">
-            </div>
-          </div>>>>>>>> 65ca54334bc6f9724c0041c8e8c45280057e40db
+          <PersonForm v-model="person"/>
           <!-- date -->
           <div class="field">
             <label class="label">Date</label>
