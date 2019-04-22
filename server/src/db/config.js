@@ -3,10 +3,10 @@ const config = require('../config');
 const connection = process.env.DATABASE_CONNECTION_URL
   ? process.env.DATABASE_CONNECTION_URL
   : {
-      host: process.env.DATABASE_HOST || '127.0.0.1',
-      user: process.env.DATABASE_USER || 'debug',
-      password: process.env.DATABASE_PASS || '123456',
-      database: process.env.DATABASE_NAME || `attendance-${config.env}`,
+      host: process.env.DATABASE_HOST,
+      user: process.env.DATABASE_USER,
+      password: process.env.DATABASE_PASS,
+      database: process.env.DATABASE_NAME,
     };
 
 module.exports = {

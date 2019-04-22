@@ -1,51 +1,58 @@
-const { server, http } = require('./common');
+const { storage } = require('./common');
 
 describe('Team', async () => {
-  it('should GET all the teams but none should exist', async () => {
-    const res = await http.get('/api/teams/');
-    res.statusCode.should.equal(200);
-    res.body.should.have.length(0);
+  it('should get all the teams but none should exist', async () => {
+    const res = await storage.team.getAll();
+    res.should.have.length(0);
   });
 
-  it('should PUT some teams in', async () => {
-    const res = await http.put('/api/teams/', { name: 'Team 1' });
+  it('should insert team', async () => {
+    const team = { name: 'Team 1' };
+    const res = await storage.team.upsert(team);
 
-    res.statusCode.should.equal(201);
-    res.body.name.should.equal('Team 1');
+    res.name.should.equal(team.name);
+    res.active.should.equal(true);
+    res.should.have.property('id');
   });
 
-  it('should PUT some teams in and GET them again', async () => {
-    const res = await http.put('/api/teams/', { name: 'TestTeam' });
-    const res2 = await http.get('/api/teams/');
-    res2.body.should.deep.include(res.body);
+  it('should insert team and get it again', async () => {
+    const team = { name: 'TestTeam' };
+    const res = await storage.team.upsert(team);
+    const res2 = await storage.team.getAll();
+    res2.should.deep.include(res);
   });
 
-  it('should DELETE team', async () => {
-    const res = await http.put('/api/teams/', { name: 'TestTeam' });
-    await http.delete(`/api/teams/${res.body.id}`);
-    const res2 = await http.get('/api/teams/');
-    res2.body.should.have.length(0);
+  it('should insert and deactivate team', async () => {
+    const team = { name: 'TestTeam' };
+    const res = await storage.team.upsert(team);
+    await storage.team.deactivate(res.id);
+    const res2 = await storage.team.getAll();
+    res2.should.have.length(0);
   });
 
-  it('should GET persons of team', async () => {
-    const team = await http.put('/api/teams', { name: 'Team1' });
-    const person = await http.put('/api/persons', {
-      name: 'Michael Jackson',
-      teamId: team.body.id,
-    });
-    const res = await http.get(`/api/teams/${team.body.id}/persons`);
-    res.body.should.have.length(1);
-    res.body.should.deep.include(team.body);
+  it('should get person in team', async () => {
+    const team = { name: 'TestTeam' };
+    const res = await storage.team.upsert(team);
+    const person = {
+      name: 'Michael',
+      teamId: res.id,
+    };
+    const res2 = await storage.person.upsert(person);
+    const res3 = await storage.mixed.personForTeam(res.id);
+    res3.should.have.length(1);
+    res3.should.deep.include(res2);
   });
 
-  it('shoud GET events of team', async () => {
-    const team = await http.put('/api/teams', { name: 'Team1' });
-    const event = await http.put('/api/events', {
+  it('shoud get events of team', async () => {
+    const team = { name: 'TestTeam' };
+    const res = await storage.team.upsert(team);
+    const event = {
       date: new Date(),
-      teamId: team.body.id,
-    });
-    const res = await http.get(`/api/teams/${team.body.id}/events`);
-    res.body.should.have.length(1);
-    res.body.should.deep.include(team.body);
+      teamId: res.id,
+    };
+    const res2 = await storage.event.upsert(event);
+    const res3 = await storage.mixed.eventForTeam(res.id);
+    res3.should.have.length(1);
+    res3.should.deep.include(res2);
   });
 });

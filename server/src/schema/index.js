@@ -1,3 +1,4 @@
+const poolEnum = require('../../../shared/data/pool').map((p) => p.name);
 const schema = [
   {
     $id: 'attendance',
@@ -42,20 +43,7 @@ const schema = [
       style: { type: 'string', description: 'swim style' },
       pool: {
         type: 'string',
-        enum: [
-          'LCM',
-          'SCM',
-          'SCY',
-          'SCM16',
-          'SCM20',
-          'SCM33',
-          'SCY20',
-          'SCY27',
-          'SCY33',
-          'SCY36',
-          'OPENM',
-          'OPENY',
-        ],
+        enum: poolEnum,
         description: 'pool length',
       },
       time: { type: 'integer', description: 'time in ms' },
