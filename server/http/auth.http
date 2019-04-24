@@ -20,6 +20,6 @@ POST  {{url}}/auth/register/ HTTP/1.1
 Content-Type: {{contentType}}
 
 {
-  "email": "test2@example.com",
-  "password": "correct horse battery staple"
+  "email": "tim@example.com",
+  "password": "test"
 } 
