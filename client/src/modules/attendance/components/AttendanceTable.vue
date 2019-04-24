@@ -101,7 +101,7 @@ export default {
     newEvent(event) {
       this.addEventActive = false;
       const teamId = this.teamId || this.persons[0].teamId;
-      this.$store.dispatch('event/newEvent', { ...event, teamId });
+      this.$store.dispatch('attendance/event/newEvent', { ...event, teamId });
     },
     next() {
       this.offset = Math.max(0, this.offset - this.collumns);
